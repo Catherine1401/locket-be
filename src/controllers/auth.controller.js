@@ -1,10 +1,6 @@
-const User = require("../models/user.model");
-const {
-  createAccessToken,
-  createRefreshToken,
-  verifyToken,
-} = require("../utils/jwt.util");
-const { veryfy } = require("../utils/auth.util");
+import User from "../models/user.model";
+import JwtUtil from "../utils/jwt.util";
+import AuthUtil from "../utils/auth.util";
 
 const googleLogin = async (req, res) => {
   try {
@@ -13,7 +9,7 @@ const googleLogin = async (req, res) => {
     // console.log("idToken", idToken);
 
     // get info from google
-    const { sub, email, picture } = await veryfy(idToken);
+    const { sub, email, picture } = await AuthUtil.veryfy(idToken);
 
     console.log("sub", sub);
     console.log("email", email);
@@ -26,8 +22,8 @@ const googleLogin = async (req, res) => {
     }
 
     // sign jwt
-    const accessToken = createAccessToken(user.id);
-    const refreshToken = createRefreshToken(user.id);
+    const accessToken = JwtUtil.createAccessToken(user.id);
+    const refreshToken = JwtUtil.createRefreshToken(user.id);
 
     await User.updateRefreshToken(user.id, refreshToken);
     res.json({ accessToken, refreshToken });
@@ -43,7 +39,7 @@ const refreshToken = async (req, res) => {
     console.log("refreshToken: ", refreshToken);
     if (!refreshToken) return res.sendStatus(401);
 
-    const payload = verifyToken(refreshToken);
+    const payload = JwtUtil.verifyToken(refreshToken);
     console.log("payload: ", payload);
 
     const user = await User.getUserById(payload.userId);

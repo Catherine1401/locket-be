@@ -1,13 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const {
-  googleLogin,
-  refreshToken,
-  logout,
-} = require("../controllers/auth.controller");
+import express from "express";
+import AuthController from "../controllers/auth.controller";
 
-router.post("/auth/google", googleLogin);
-router.post("/auth/refresh", refreshToken);
-router.post("/auth/logout", logout);
+const router = express.Router();
+
+router.post("/auth/google", AuthController.googleLogin);
+router.post("/auth/refresh", AuthController.refreshToken);
+router.post("/auth/logout", AuthController.logout);
 
 module.exports = router;

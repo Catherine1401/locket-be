@@ -1,4 +1,4 @@
-const { pool } = require("../config/db");
+import { pool } from "../config/db.js";
 
 // getuser
 const getUserById = async (id) => {
@@ -48,12 +48,12 @@ const createUser = async (googleId, email, avatarUrl) => {
   return response.rows[0];
 };
 
-module.exports = {
+export {
   getUserById,
   getUserByEmail,
   getUserByGoogleId,
-  createUser,
   updateRefreshToken,
+  createUser,
 };
 
 // test

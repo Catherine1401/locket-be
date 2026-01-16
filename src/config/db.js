@@ -1,5 +1,5 @@
-const { Pool, types } = require("pg");
-const dotenv = require("dotenv").config();
+import { Pool, types } from "pg";
+import "dotenv/config";
 
 types.setTypeParser(1082, (value) => value);
 
@@ -11,4 +11,4 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-module.exports = { pool };
+export default pool;
