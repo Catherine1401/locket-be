@@ -49,12 +49,9 @@ const updateUser = async (id, fields) => {
     return null;
   }
 
-  // remove last comma
-  claude = claude.slice(0, claude.length - 1);
-
   // build query
   const query = {
-    text: `UPDATE users SET ${claude} WHERE id = $${counter + 1} RETURNING *`,
+    text: `UPDATE users SET ${claude} updated_at = now() WHERE id = $${counter + 1} RETURNING *`,
     values: [...values, id],
   };
 

@@ -1,6 +1,10 @@
 import { createUser, getUser, updateUser } from "../models/user.model.js";
 import { verifyToken } from "../utils/auth.util.js";
-import { createAccessToken, createRefreshToken, jwtVerifyToken } from "../utils/jwt.util.js";
+import {
+  createAccessToken,
+  createRefreshToken,
+  jwtVerifyRefreshToken,
+} from "../utils/jwt.util.js";
 
 const googleLogin = async (req, res) => {
   try {
@@ -41,7 +45,7 @@ const refreshToken = async (req, res) => {
     console.log("refreshToken: ", refreshToken);
     if (!refreshToken) return res.sendStatus(401);
 
-    const payload = jwtVerifyToken(refreshToken);
+    const payload = jwtVerifyRefreshToken(refreshToken);
     console.log("payload: ", payload);
 
     const user = await getUser({ id: payload.userId });
