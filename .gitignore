@@ -4,3 +4,4 @@ package-lock.json
 test/
 __mocks__/
 jest.config.js
+uploads/
