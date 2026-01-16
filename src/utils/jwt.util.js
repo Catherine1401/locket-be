@@ -12,9 +12,8 @@ const createRefreshToken = (userId) => {
   });
 };
 
-const verifyToken = (token) => {
+const jwtVerifyToken = (token) => {
   return jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 };
 
-module.exports = { createAccessToken, createRefreshToken, verifyToken };
-
+export { createAccessToken, createRefreshToken, jwtVerifyToken };

@@ -1,6 +1,6 @@
-import User from "../models/user.model";
-import JwtUtil from "../utils/jwt.util";
-import AuthUtil from "../utils/auth.util";
+import { createUser, getUser, updateUser } from "../models/user.model.js";
+import { verifyToken } from "../utils/auth.util.js";
+import { createAccessToken, createRefreshToken, jwtVerifyToken } from "../utils/jwt.util.js";
 
 const googleLogin = async (req, res) => {
   try {
@@ -9,23 +9,25 @@ const googleLogin = async (req, res) => {
     // console.log("idToken", idToken);
 
     // get info from google
-    const { sub, email, picture } = await AuthUtil.veryfy(idToken);
+    const { sub, email, picture } = await verifyToken(idToken);
 
     console.log("sub", sub);
     console.log("email", email);
     console.log("picture", picture);
 
-    let user = await User.getUserByGoogleId(sub);
+    let user = await getUser({ google_id: sub });
 
     if (!user) {
-      user = await User.createUser(sub, email, picture);
+      user = await createUser(sub, email, picture);
     }
 
     // sign jwt
-    const accessToken = JwtUtil.createAccessToken(user.id);
-    const refreshToken = JwtUtil.createRefreshToken(user.id);
+    const accessToken = createAccessToken(user.id);
+    const refreshToken = createRefreshToken(user.id);
 
-    await User.updateRefreshToken(user.id, refreshToken);
+    await updateUser(user.id, {
+      refresh_token: refreshToken,
+    });
     res.json({ accessToken, refreshToken });
   } catch (e) {
     console.error("error from google login", e);
@@ -39,12 +41,13 @@ const refreshToken = async (req, res) => {
     console.log("refreshToken: ", refreshToken);
     if (!refreshToken) return res.sendStatus(401);
 
-    const payload = JwtUtil.verifyToken(refreshToken);
+    const payload = jwtVerifyToken(refreshToken);
     console.log("payload: ", payload);
 
-    const user = await User.getUserById(payload.userId);
+    const user = await getUser({ id: payload.userId });
     console.log("user: ", user);
-    if (!user || user.refresh_token !== refreshToken) return res.sendStatus(403);
+    if (!user || user.refresh_token !== refreshToken)
+      return res.sendStatus(403);
 
     const newAccessToken = createAccessToken(user.id);
     console.log("newAccessToken: ", newAccessToken);
@@ -60,9 +63,9 @@ const logout = async (req, res) => {
   try {
     const { refreshToken } = req.body;
     if (!refreshToken) return res.sendStatus(400);
-    const user = await User.getUserByRefreshToken(refreshToken);
+    const user = await getUser({ refresh_token: refreshToken });
     if (!user) return res.sendStatus(403);
-    await User.updateRefreshToken(user.id, null);
+    await updateUser(user.id, { refresh_token: null });
     res.sendStatus(204);
   } catch (e) {
     console.error("error from logout", e);
@@ -70,4 +73,4 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = { googleLogin, refreshToken, logout };
+export { googleLogin, refreshToken, logout };

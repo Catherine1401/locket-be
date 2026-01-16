@@ -1,7 +1,7 @@
 import { OAuth2Client } from "google-auth-library";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-const veryfy = async (idToken) => {
+const verifyToken = async (idToken) => {
   const ticket = await client.verifyIdToken({
     idToken: idToken,
     audience: process.env.WEB_CLIENT_ID,
@@ -10,5 +10,4 @@ const veryfy = async (idToken) => {
   return ticket.getPayload();
 };
 
-module.exports = { veryfy };
-
+export { verifyToken };

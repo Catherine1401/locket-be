@@ -1,9 +1,8 @@
-const express = require("express");
+import express from "express";
+import { authRouter } from "./src/routers/auth.route.js";
+
 const app = express();
 const port = process.env.PORT ?? 3000;
-
-const { auth } = require("./src/middlewares/auth.middleware");
-const authRouter = require("./src/routers/auth.route");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

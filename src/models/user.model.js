@@ -1,41 +1,65 @@
 import { pool } from "../config/db.js";
 
 // getuser
-const getUserById = async (id) => {
-  const query = {
-    text: "SELECT * FROM users WHERE id = $1",
-    values: [id],
-  };
-  const response = await pool.query(query);
-  return response.rows[0];
+const getUser = async (field) => {
+  const filters = [
+    "id",
+    "email",
+    "avatar_url",
+    "google_id",
+    "refresh_token",
+    "birthday",
+    "created_at",
+    "updated_at",
+  ];
+
+  const key = Object.keys(field)[0];
+  if (filters.includes(key)) {
+    const query = {
+      text: `SELECT * FROM users WHERE ${key} = $1`,
+      values: [field[key]],
+    };
+    const response = await pool.query(query);
+    return response.rows[0];
+  }
 };
 
-// get user by email
-const getUserByEmail = async (email) => {
+// update user
+const updateUser = async (id, fields) => {
+  const filters = [
+    "email",
+    "avatar_url",
+    "google_id",
+    "refresh_token",
+    "birthday",
+  ];
+
+  // build update clause
+  let counter = 0;
+  let claude = "";
+  let values = [];
+  for (const field in fields) {
+    if (filters.includes(field)) {
+      claude += `${field} = $${++counter},`;
+      values.push(fields[field]);
+    }
+  }
+
+  if (claude === "") {
+    return null;
+  }
+
+  // remove last comma
+  claude = claude.slice(0, claude.length - 1);
+
+  // build query
   const query = {
-    text: "SELECT * FROM users WHERE email = $1",
-    values: [email],
+    text: `UPDATE users SET ${claude} WHERE id = $${counter + 1} RETURNING *`,
+    values: [...values, id],
   };
+
   const response = await pool.query(query);
   return response.rows[0];
-};
-
-const getUserByGoogleId = async (googleId) => {
-  const query = {
-    text: "SELECT * FROM users WHERE google_id = $1",
-    values: [googleId],
-  };
-  const response = await pool.query(query);
-  return response.rows[0];
-};
-
-// update refresh token
-const updateRefreshToken = async (id, refreshToken) => {
-  const query = {
-    text: "UPDATE users SET refresh_token = $1, updated_at = now() WHERE id = $2",
-    values: [refreshToken, id],
-  };
-  await pool.query(query);
 };
 
 // create user
@@ -48,13 +72,7 @@ const createUser = async (googleId, email, avatarUrl) => {
   return response.rows[0];
 };
 
-export {
-  getUserById,
-  getUserByEmail,
-  getUserByGoogleId,
-  updateRefreshToken,
-  createUser,
-};
+export { getUser, createUser, updateUser };
 
 // test
 // async function test() {
