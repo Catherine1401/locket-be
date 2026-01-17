@@ -10,10 +10,10 @@ const googleLogin = async (req, res) => {
   try {
     // get toekn
     const { idToken } = req.body;
-    // console.log("idToken", idToken);
+    console.log("idToken from google", idToken);
 
     // get info from google
-    const { sub, email, picture } = await verifyToken(idToken);
+    const { sub, email, picture, name } = await verifyToken(idToken);
 
     console.log("sub", sub);
     console.log("email", email);
@@ -22,7 +22,12 @@ const googleLogin = async (req, res) => {
     let user = await getUser({ google_id: sub });
 
     if (!user) {
-      user = await createUser(sub, email, picture);
+      user = await createUser({
+        google_id: sub,
+        email,
+        avatar_url: picture,
+        display_name: name,
+      });
     }
 
     // sign jwt

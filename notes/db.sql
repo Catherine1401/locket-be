@@ -3,11 +3,22 @@ CREATE TABLE users (
 
   google_id TEXT UNIQUE NOT NULL,
   refresh_token TEXT,
+  share_code VARCHAR(255) UNIQUE NOT NULL,
+
+  display_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   avatar_url text,
   birthday date,
+
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE users
+ALTER COLUMN share_code
+SET DEFAULT translate(
+  encode(gen_random_bytes(4), 'base64'),
+  '+/=', ''
 );
 
 CREATE TABLE moments (

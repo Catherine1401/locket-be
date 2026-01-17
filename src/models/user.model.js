@@ -4,11 +4,13 @@ import { pool } from "../config/db.js";
 const getUser = async (field) => {
   const filters = [
     "id",
-    "email",
-    "avatar_url",
     "google_id",
     "refresh_token",
+    "share_code",
+    "email",
+    "avatar_url",
     "birthday",
+    "display_name",
     "created_at",
     "updated_at",
   ];
@@ -27,6 +29,7 @@ const getUser = async (field) => {
 // update user
 const updateUser = async (id, fields) => {
   const filters = [
+    "display_name",
     "email",
     "avatar_url",
     "google_id",
@@ -60,10 +63,34 @@ const updateUser = async (id, fields) => {
 };
 
 // create user
-const createUser = async (googleId, email, avatarUrl) => {
+const createUser = async (fields) => {
+  const filters = [
+    "google_id",
+    "refresh_token",
+    "email",
+    "avatar_url",
+    "birthday",
+    "display_name",
+  ];
+
+  const keys = Object.keys(fields);
+  if (keys.length === 0) {
+    return null;
+  }
+
+  const keysMatch = keys.filter((key) => filters.includes(key));
+  if (keysMatch.length === 0) {
+    return null;
+  }
+
+  const valuesMatch = keysMatch.map((key) => fields[key]);
+  const placeholders = keysMatch.map((_, index) => `$${index + 1}`);
+
   const query = {
-    text: "INSERT INTO users (email, avatar_url, google_id) VALUES ($1, $2, $3) RETURNING *",
-    values: [email, avatarUrl, googleId],
+    text: `INSERT INTO users (${keysMatch.join(", ")})
+           VALUES (${placeholders.join(", ")})
+            RETURNING *`,
+    values: valuesMatch,
   };
   const response = await pool.query(query);
   return response.rows[0];

@@ -1,12 +1,20 @@
 import { getUser, updateUser } from "../models/user.model.js";
-import { isDate, isEmail } from "../utils/validator.js";
 
 const getMe = async (req, res) => {
   const user = await getUser({ id: req.userId });
 
   if (!user) return res.sendStatus(404);
+  console.log("user from get me", user);
 
-  res.json(user);
+  const userResponse = {
+    id: user.id,
+    email: user.email,
+    avatarUrl: user.avatar_url,
+    birthday: user.birthday,
+    displayName: user.display_name,
+  };
+
+  res.json(userResponse);
 };
 
 const updateMe = async (req, res) => {
@@ -19,8 +27,17 @@ const updateMe = async (req, res) => {
   });
 
   if (!user) return res.sendStatus(404);
+  console.log("user from update me", user);
 
-  res.json(user);
+  const userResponse = {
+    id: user.id,
+    email: user.email,
+    avatarUrl: user.avatar_url,
+    birthday: user.birthday,
+    displayName: user.display_name,
+  };
+
+  res.json(userResponse);
 };
 
 export { getMe, updateMe };

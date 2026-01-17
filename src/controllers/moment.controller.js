@@ -6,10 +6,17 @@ export const createMomentController = async (req, res) => {
     const image = req.file.path;
     const { caption } = req.body;
     console.log("image from create moment", image);
-    console.log("caption from create moment", caption);
-    console.log("type of caption", typeof caption);
     const moment = await createMoment(userId, image, caption);
-    res.json(moment);
+    console.log("moment from create moment", moment);
+
+    const momentResponse = {
+      id: moment.id,
+      imageUrl: moment.image_url,
+      caption: moment.caption,
+      userId: moment.user_id,
+      createdAt: moment.created_at,
+    };
+    res.json(momentResponse);
   } catch (e) {
     console.error("error from create moment", e);
     res.status(500).json({ message: "error from create moment" });
@@ -20,7 +27,8 @@ export const deleteMomentController = async (req, res) => {
   try {
     const { id } = req.params;
     const moment = await deleteMoment(id);
-    res.json(moment);
+    console.log("moment from delete moment", moment);
+    res.json({ message: "moment deleted" });
   } catch (e) {
     console.error("error from delete moment", e);
     res.status(500).json({ message: "error from delete moment" });

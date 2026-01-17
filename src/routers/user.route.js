@@ -9,3 +9,4 @@ userRouter.get("/users/me", isAuth, getMe);
 userRouter.put("/users/me", isAuth, validateUserInfo, updateMe);
 
 export { userRouter };
+
