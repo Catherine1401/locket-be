@@ -1,4 +1,4 @@
-import { createMoment } from "../models/moment.model.js";
+import { createMoment, deleteMoment } from "../models/moment.model.js";
 
 export const createMomentController = async (req, res) => {
   try {
@@ -14,4 +14,15 @@ export const createMomentController = async (req, res) => {
     console.error("error from create moment", e);
     res.status(500).json({ message: "error from create moment" });
   }
-}
+};
+
+export const deleteMomentController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const moment = await deleteMoment(id);
+    res.json(moment);
+  } catch (e) {
+    console.error("error from delete moment", e);
+    res.status(500).json({ message: "error from delete moment" });
+  }
+};
