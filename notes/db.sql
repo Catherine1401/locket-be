@@ -1,3 +1,4 @@
+-- users
 CREATE TABLE users (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
 
@@ -14,6 +15,7 @@ CREATE TABLE users (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- alter users
 ALTER TABLE users
 ALTER COLUMN share_code
 SET DEFAULT translate(
@@ -21,6 +23,7 @@ SET DEFAULT translate(
   '+/=', ''
 );
 
+-- create moments
 CREATE TABLE moments (
   id serial PRIMARY KEY,
   image_url text NOT NULL,
@@ -35,6 +38,57 @@ CREATE TABLE moments (
 ALTER TABLE moments
 ADD CONSTRAINT fk_moments_user
 FOREIGN KEY (user_id)
+REFERENCES users(id)
+ON DELETE RESTRICT;
+
+-- create request_friends
+
+CREATE TYPE status AS ENUM ('pending', 'accepted', 'rejected');
+
+CREATE TABLE request_friends (
+  id serial PRIMARY KEY,
+  from_user_id uuid NOT NULL,
+  to_user_id uuid NOT NULL,
+  status status DEFAULT 'pending',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Foreign Key
+ALTER TABLE request_friends
+ADD CONSTRAINT fk_request_friends_from_user
+FOREIGN KEY (from_user_id)
+REFERENCES users(id)
+ON DELETE RESTRICT;
+
+ALTER TABLE request_friends
+ADD CONSTRAINT fk_request_friends_to_user
+FOREIGN KEY (to_user_id)
+REFERENCES users(id)
+ON DELETE RESTRICT;
+
+-- create friends
+
+CREATE TYPE friend_status AS ENUM ('friend', 'unfriend');
+
+CREATE TABLE friends (
+  id serial PRIMARY KEY,
+  user_id1 uuid NOT NULL,
+  user_id2 uuid NOT NULL,
+  status friend_status,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  last_updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Foreign Key
+ALTER TABLE friends
+ADD CONSTRAINT fk_friends_user1
+FOREIGN KEY (user_id1)
+REFERENCES users(id)
+ON DELETE RESTRICT;
+
+ALTER TABLE friends
+ADD CONSTRAINT fk_friends_user2
+FOREIGN KEY (user_id2)
 REFERENCES users(id)
 ON DELETE RESTRICT;
 

@@ -7,3 +7,7 @@ export const isEmail = (email) => {
 export const isDate = (date) => {
   return validator.isDate(date, {format: "YYYY-MM-DD"});
 };
+
+export const isUrl = (url) => {
+  return validator.isURL(url);
+}

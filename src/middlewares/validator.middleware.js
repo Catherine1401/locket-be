@@ -1,4 +1,4 @@
-import { isDate, isEmail } from "../utils/validator.js";
+import { isDate, isEmail, isUrl } from "../utils/validator.js";
 
 export const validateUserInfo = (req, res, next) => {
   const { email, avatarUrl, birthday } = req.body;
@@ -6,11 +6,12 @@ export const validateUserInfo = (req, res, next) => {
   if (!email || !isEmail(email)) {
     return res.status(400).json({ message: "email is invalid" });
   }
-  if (!avatarUrl) {
+  if (!avatarUrl || !isUrl(avatarUrl)) {
     return res.status(400).json({ message: "avatarUrl is invalid" });
   }
   if (!birthday || !isDate(birthday)) {
     return res.status(400).json({ message: "birthday is invalid" });
   }
+
   next();
 };
