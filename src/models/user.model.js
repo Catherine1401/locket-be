@@ -1,7 +1,7 @@
 import { pool } from "../config/db.js";
 
 // getuser
-const getUser = async (field) => {
+export const getUser = async (fields) => {
   const filters = [
     "id",
     "google_id",
@@ -15,19 +15,39 @@ const getUser = async (field) => {
     "updated_at",
   ];
 
-  const key = Object.keys(field)[0];
+  const key = Object.keys(fields)[0];
   if (filters.includes(key)) {
     const query = {
       text: `SELECT * FROM users WHERE ${key} = $1`,
-      values: [field[key]],
+      values: [fields[key]],
     };
     const response = await pool.query(query);
     return response.rows[0];
   }
 };
 
+export const getFriendShips = async (userId) => {
+  const query = {
+    text: `SELECT * FROM friends WHERE user_id1 = $1 OR user_id2 = $1`,
+    values: [userId],
+  };
+
+  const response = await pool.query(query);
+  return response.rows;
+};
+
+export const getFriendShip = async (userId1, userId2) => {
+  const query = {
+    text: `SELECT * FROM friends WHERE (user_id1 = $1 AND user_id2 = $2) OR (user_id1 = $2 AND user_id2 = $1)`,
+    values: [userId1, userId2],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
+
 // update user
-const updateUser = async (id, fields) => {
+export const updateUser = async (id, fields) => {
   const filters = [
     "display_name",
     "email",
@@ -63,7 +83,7 @@ const updateUser = async (id, fields) => {
 };
 
 // create user
-const createUser = async (fields) => {
+export const createUser = async (fields) => {
   const filters = [
     "google_id",
     "refresh_token",
@@ -95,21 +115,3 @@ const createUser = async (fields) => {
   const response = await pool.query(query);
   return response.rows[0];
 };
-
-export { getUser, createUser, updateUser };
-
-// test
-// async function test() {
-//   // const user = await createUser("huyv@gmail.com", "", "2000-01-01");
-//   // console.log(await getUser("036a7d5b-8be4-4b51-8569-11fd52c15204"));
-//   // console.log(typeof (await getUser("036a7d5b-8be4-4b51-8569-11fd52c15204")));
-//   // console.log(Boolean(await getUser("036a7d5b-8be4-4b51-8569-11fd52c15201")));
-//   const user = await getUser("036a7d5b-8be4-4b51-8569-11fd52c15209");
-//   if (user) {
-//     console.log(user);
-//   } else {
-//     console.log("not found");
-//   }
-// }
-
-// test();

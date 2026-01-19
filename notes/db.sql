@@ -74,7 +74,7 @@ CREATE TABLE friends (
   id serial PRIMARY KEY,
   user_id1 uuid NOT NULL,
   user_id2 uuid NOT NULL,
-  status friend_status,
+  status friend_status default 'friend',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   last_updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

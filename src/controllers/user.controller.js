@@ -1,4 +1,5 @@
 import { getUser, updateUser } from "../models/user.model.js";
+import { isFriend } from "../utils/user.util.js";
 
 export const getMe = async (req, res) => {
   const user = await getUser({ id: req.userId });
@@ -41,14 +42,23 @@ export const updateMe = async (req, res) => {
   res.json(userResponse);
 };
 
-export const getUserByShareCode = async (req, res) => {
-  const { shareCode } = req.params;
-  const user = await getUser({ share_code: shareCode });
-  if (!user) return res.status(404).json({ message: "user not found" });
-  const userResponse = {
-    id: user.id,
-    displayName: user.display_name,
-    avatarUrl: user.avatar_url,
+export const getUserByShareCodeController = async (req, res) => {
+  const { user } = req;
+
+  let response = {
+    user: {
+      id: user.id,
+      avatarUrl: user.avatar_url,
+      displayName: user.display_name,
+    },
+  };
+  const status = await isFriend(user.id, req.userId);
+
+  if (status) {
+    response.isFriend = true;
+  } else {
+    response.isFriend = false;
   }
-  res.json(userResponse);
+
+  res.json(response);
 };
