@@ -38,6 +38,18 @@ export const createFriendRequest = async (fromUserId, toUserId) => {
   return response.rows[0];
 };
 
+// get list friend request
+export const getFriendRequests = async (userId) => {
+  const query = {
+    text: `SELECT * FROM request_friends
+            WHERE to_user_id = $1 AND status = 'pending'`,
+    values: [userId],
+  };
+
+  const response = await pool.query(query);
+  return response.rows;
+};
+
 // response request friend
 export const responseFriendRequest = async (fromUserId, toUserId, status) => {
   if (status !== "accept" && status !== "reject") return null;

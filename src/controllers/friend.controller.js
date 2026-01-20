@@ -1,4 +1,7 @@
-import { createFriendRequest } from "../models/friend.model.js";
+import {
+  createFriendRequest,
+  getFriendRequests,
+} from "../models/friend.model.js";
 
 export const createFriendRequestController = async (req, res) => {
   const { userId } = req;
@@ -11,5 +14,21 @@ export const createFriendRequestController = async (req, res) => {
   } catch (e) {
     console.error("error from create friend request", e);
     res.status(500).json({ message: "error from create friend request" });
+  }
+};
+
+export const getFriendRequestsController = async (req, res) => {
+  const { userId } = req;
+
+  try {
+    const friendRequests = await getFriendRequests(userId);
+    const senderIds = friendRequests.map((request) => {
+      return request.from_user_id;
+    });
+
+    res.json(senderIds);
+  } catch (e) {
+    console.error("error from get friend requests", e);
+    res.status(500).json({ message: "error from get friend requests" });
   }
 };
