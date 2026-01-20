@@ -67,9 +67,11 @@ REFERENCES users(id)
 ON DELETE RESTRICT;
 
 
-ALTER TABLE request_friends
-ADD CONSTRAINT unique_request_pair
-UNIQUE (from_user_id, to_user_id);
+CREATE UNIQUE INDEX unique_request_pair_unordered
+ON request_friends (
+  LEAST(from_user_id, to_user_id),
+  GREATEST(from_user_id, to_user_id)
+);
 
 -- create friends
 
@@ -97,10 +99,12 @@ FOREIGN KEY (user_id2)
 REFERENCES users(id)
 ON DELETE RESTRICT;
 
-ALTER TABLE friends
-ADD CONSTRAINT unique_friend_pair
-UNIQUE (user_id1, user_id2);
 
+CREATE UNIQUE INDEX unique_friends_pair_unordered
+ON friends (
+  LEAST(user_id1, user_id2),
+  GREATEST(user_id1, user_id2)
+);
 
 -- chore
 DROP TABLE users;

@@ -8,7 +8,10 @@ export const createFriendRequestController = async (req, res) => {
   const { toUserId } = req.body;
 
   try {
-    await createFriendRequest(userId, toUserId);
+    const friendRequest = await createFriendRequest(userId, toUserId);
+
+    if (!friendRequest)
+      return res.status(409).json({ message: "friend request already sended" });
 
     res.status(201).json({ message: "friend request created" });
   } catch (e) {

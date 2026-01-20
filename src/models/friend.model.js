@@ -27,7 +27,10 @@ export const createFriendRequest = async (fromUserId, toUserId) => {
   const query = {
     text: `INSERT INTO request_friends (from_user_id, to_user_id, status)
           VALUES ($1, $2, 'pending')
-          ON CONFLICT (from_user_id, to_user_id)
+          ON CONFLICT (
+            LEAST(from_user_id, to_user_id),
+            GREATEST(from_user_id, to_user_id)
+          )
           DO UPDATE SET status = 'pending'
           WHERE request_friends.status = 'rejected'
           RETURNING *`,
@@ -71,7 +74,7 @@ export const createFriend = async (userId1, userId2) => {
   const query = {
     text: `INSERT INTO friends (user_id1, user_id2)
             VALUES ($1, $2)
-            ON CONFLICT (user_id1, user_id2)
+            ON CONFLICT 
             DO NOTHING
             RETURNING *`,
     values: [userId1, userId2],
