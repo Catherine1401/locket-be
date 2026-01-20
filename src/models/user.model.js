@@ -26,26 +26,6 @@ export const getUser = async (fields) => {
   }
 };
 
-export const getFriendShips = async (userId) => {
-  const query = {
-    text: `SELECT * FROM friends WHERE user_id1 = $1 OR user_id2 = $1`,
-    values: [userId],
-  };
-
-  const response = await pool.query(query);
-  return response.rows;
-};
-
-export const getFriendShip = async (userId1, userId2) => {
-  const query = {
-    text: `SELECT * FROM friends WHERE (user_id1 = $1 AND user_id2 = $2) OR (user_id1 = $2 AND user_id2 = $1)`,
-    values: [userId1, userId2],
-  };
-
-  const response = await pool.query(query);
-  return response.rows[0];
-};
-
 // update user
 export const updateUser = async (id, fields) => {
   const filters = [

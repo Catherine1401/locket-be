@@ -1,8 +1,5 @@
-import {
-  getFriendShip,
-  getFriendShips,
-  getUser,
-} from "../models/user.model.js";
+import { getFriendShip, getFriendShips } from "../models/friend.model.js";
+import { getUser } from "../models/user.model.js";
 
 export const getFriends = async (userId) => {
   const friendShips = await getFriendShips(userId);
@@ -20,4 +17,3 @@ export const isFriend = async (userId1, userId2) => {
   const friendShip = await getFriendShip(userId1, userId2);
   return !!friendShip;
 };
-

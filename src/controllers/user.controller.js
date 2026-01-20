@@ -1,11 +1,11 @@
 import { getUser, updateUser } from "../models/user.model.js";
+import { converToLocalTime } from "../utils/time.util.js";
 import { isFriend } from "../utils/user.util.js";
 
 export const getMe = async (req, res) => {
   const user = await getUser({ id: req.userId });
 
   if (!user) return res.sendStatus(404);
-  console.log("user from get me", user);
 
   const userResponse = {
     id: user.id,

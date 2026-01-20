@@ -66,6 +66,11 @@ FOREIGN KEY (to_user_id)
 REFERENCES users(id)
 ON DELETE RESTRICT;
 
+
+ALTER TABLE request_friends
+ADD CONSTRAINT unique_request_pair
+UNIQUE (from_user_id, to_user_id);
+
 -- create friends
 
 CREATE TYPE friend_status AS ENUM ('friend', 'unfriend');
@@ -91,6 +96,10 @@ ADD CONSTRAINT fk_friends_user2
 FOREIGN KEY (user_id2)
 REFERENCES users(id)
 ON DELETE RESTRICT;
+
+ALTER TABLE friends
+ADD CONSTRAINT unique_friend_pair
+UNIQUE (user_id1, user_id2);
 
 
 -- chore
