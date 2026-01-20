@@ -1,6 +1,6 @@
 import { pool } from "../config/db.js";
 
-// ger friendships
+// get friendships
 export const getFriendShips = async (userId) => {
   const query = {
     text: `SELECT * FROM friends WHERE user_id1 = $1 OR user_id2 = $1`,
@@ -52,6 +52,19 @@ export const getFriendRequests = async (userId) => {
   const response = await pool.query(query);
   return response.rows;
 };
+
+// get friend request
+export const getFriendRequest = async (fromUserId, toUserId) => {
+  const query = {
+    text: `SELECT * FROM request_friends
+            WHERE from_user_id = $1 AND to_user_id = $2 AND status = 'pending'`,
+    values: [fromUserId, toUserId],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+}
+  
 
 // response request friend
 export const responseFriendRequest = async (fromUserId, toUserId, status) => {

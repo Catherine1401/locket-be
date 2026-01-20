@@ -63,6 +63,7 @@ export const updateUser = async (id, fields) => {
 };
 
 // create user
+// đoạn này có thể thay thế sang upsert
 export const createUser = async (fields) => {
   const filters = [
     "google_id",

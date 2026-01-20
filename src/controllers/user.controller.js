@@ -1,6 +1,9 @@
 import { getUser, updateUser } from "../models/user.model.js";
-import { converToLocalTime } from "../utils/time.util.js";
-import { isFriend } from "../utils/user.util.js";
+import {
+  isFriend,
+  isReceiverRequest,
+  isSenderRequest,
+} from "../utils/friend.util.js";
 
 export const getMe = async (req, res) => {
   const user = await getUser({ id: req.userId });
@@ -52,13 +55,20 @@ export const getUserByShareCodeController = async (req, res) => {
       displayName: user.display_name,
     },
   };
-  const status = await isFriend(user.id, req.userId);
 
-  if (status) {
-    response.isFriend = true;
-  } else {
-    response.isFriend = false;
+  let status = "unfriend";
+  if (await isSenderRequest(user.id, req.userId)) {
+    status = "pending";
   }
 
+  if (await isReceiverRequest(user.id, req.userId)) {
+    status = "response";
+  }
+
+  if (await isFriend(user.id, req.userId)) {
+    status = "friend";
+  }
+
+  response.status = status;
   res.json(response);
 };

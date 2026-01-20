@@ -19,6 +19,7 @@ const googleLogin = async (req, res) => {
     console.log("email", email);
     console.log("picture", picture);
 
+    // đoạn này có thể thay thế sang logic upsert
     let user = await getUser({ google_id: sub });
 
     if (!user) {
