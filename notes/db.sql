@@ -27,6 +27,7 @@ SET DEFAULT translate(
 CREATE TABLE moments (
   id serial PRIMARY KEY,
   image_url text NOT NULL,
+  thumbnail_url text NOT NULL,
   image_public_id text NOT NULL,
   caption text,
   user_id uuid NOT NULL,
