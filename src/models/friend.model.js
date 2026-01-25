@@ -42,11 +42,23 @@ export const createFriendRequest = async (fromUserId, toUserId) => {
   return response.rows[0];
 };
 
-// get list friend request
+// get list friend request by toUserId
 export const getFriendRequestsByToUserId = async (userId) => {
   const query = {
     text: `SELECT * FROM request_friends
             WHERE to_user_id = $1 AND status = 'pending'`,
+    values: [userId],
+  };
+
+  const response = await pool.query(query);
+  return response.rows;
+};
+
+// get list friend request by fromUserId
+export const getFriendRequestsByFromUserId = async (userId) => {
+  const query = {
+    text: `SELECT * FROM request_friends
+            WHERE from_user_id = $1 AND status = 'pending'`,
     values: [userId],
   };
 
@@ -118,6 +130,18 @@ export const responseFriendRequestById = async (id, message) => {
             WHERE id = $1  AND status = 'pending'
             RETURNING *`,
     values: [id, realMessage],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
+
+// delete friend request
+export const deleteFriendRequest = async (id) => {
+  const query = {
+    text: `DELETE FROM request_friends
+            WHERE id = $1`,
+    values: [id],
   };
 
   const response = await pool.query(query);

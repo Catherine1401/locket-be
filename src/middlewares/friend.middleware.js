@@ -59,3 +59,15 @@ export const checkRequestFriendResponse = async (req, res, next) => {
     return res.status(400).json({ message: "message not valid" });
   next();
 };
+
+export const isSenderRequestMiddleware = async (req, res, next) => {
+  const { userId } = req;
+  const { id } = req.params;
+
+  const request = await getFriendRequestById(id);
+  if (!request) return res.status(404).json({ message: "request not found" });
+
+  if (request.from_user_id !== userId)
+    return res.status(409).json({ message: "you can't response this request" });
+  next();
+};
