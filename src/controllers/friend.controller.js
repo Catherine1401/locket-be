@@ -3,6 +3,7 @@ import {
   createFriendRequest,
   getFriendRequestsByToUserId,
   responseFriendRequest,
+  responseFriendRequestById,
 } from "../models/friend.model.js";
 import { getUser } from "../models/user.model.js";
 
@@ -36,7 +37,8 @@ export const getFriendRequestsController = async (req, res) => {
         const user = await getUser({ id: request.from_user_id });
 
         return {
-          id: user.id,
+          id: request.id,
+          userId: user.id,
           name: user.display_name,
           avatar: user.avatar_url,
         };
@@ -55,19 +57,18 @@ export const getFriendRequestsController = async (req, res) => {
 };
 
 export const responseFriendRequestController = async (req, res) => {
-  const { userId: myId, friendRequest } = req;
-  const { status } = req.body;
+  const { id: requestId } = req.params;
+  const { message } = req.body;
+  const { userId: myId } = req;
 
   try {
-    await responseFriendRequest(friendRequest.from_user_id, myId, status);
+    const request = await responseFriendRequestById(requestId, message);
+    if (!request) return res.status(404).json({ message: "request not found" });
 
-    if (status === "accepted") {
-      const friendship = await createFriend(myId, friendRequest.from_user_id);
-      if (!friendship)
-        return res.status(409).json({ message: "friendship already created" });
-
+    if (message === "accept") {
+      await createFriend(myId, request.from_user_id);
       res.json({ message: "friendship created" });
-    } else {
+    } else if (message === "reject") {
       res.json({ message: "friend request rejected" });
     }
   } catch (e) {

@@ -107,6 +107,23 @@ export const responseFriendRequest = async (fromUserId, toUserId, status) => {
   return response.rows[0];
 };
 
+// response request friend by id
+export const responseFriendRequestById = async (id, message) => {
+  if (message !== "accept" && message !== "reject") return null;
+  const realMessage = message === "accept" ? "accepted" : "rejected";
+
+  const query = {
+    text: `UPDATE request_friends
+            SET status = $2
+            WHERE id = $1  AND status = 'pending'
+            RETURNING *`,
+    values: [id, realMessage],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
+
 // create friend
 export const createFriend = async (userId1, userId2) => {
   const query = {
@@ -116,7 +133,8 @@ export const createFriend = async (userId1, userId2) => {
               LEAST(user_id1, user_id2),
               GREATEST(user_id1, user_id2)
             )
-            DO NOTHING
+            DO UPDATE SET status = 'friend', updated_at = now()
+            WHERE friends.status = 'unfriend'
             RETURNING *`,
     values: [userId1, userId2],
   };
@@ -129,7 +147,7 @@ export const createFriend = async (userId1, userId2) => {
 export const unfriend = async (userId1, userId2) => {
   const query = {
     text: `UPDATE friends
-          SET status = 'unfriend', last_updated_at = now()
+          SET status = 'unfriend', updated_at = now()
           WHERE (user_id1 = $1 AND user_id2 = $2) OR (user_id1 = $2 AND user_id2 = $1)
           RETURNING *`,
     values: [userId1, userId2],

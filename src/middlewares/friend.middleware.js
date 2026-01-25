@@ -1,4 +1,5 @@
 import {
+  getFriendRequestById,
   getFriendRequestsBoth,
   getFriendShip,
 } from "../models/friend.model.js";
@@ -37,5 +38,24 @@ export const checkFriendShip = async (req, res, next) => {
   }
 
   req.friendShip = "stranger";
+  next();
+};
+
+// check request friend
+export const checkRequestFriendExits = async (req, res, next) => {
+  const { id: requestId } = req.params;
+
+  const requestFriend = await getFriendRequestById(requestId);
+  if (!requestFriend)
+    return res.status(404).json({ message: "request friend not found" });
+
+  next();
+};
+
+export const checkRequestFriendResponse = async (req, res, next) => {
+  const { message } = req.body;
+
+  if (message !== "accept" && message !== "reject")
+    return res.status(400).json({ message: "message not valid" });
   next();
 };

@@ -6,6 +6,10 @@ import {
   responseFriendRequestController,
 } from "../controllers/friend.controller.js";
 import { checkUserExistsById } from "../middlewares/user.middleware.js";
+import {
+  checkRequestFriendExits,
+  checkRequestFriendResponse,
+} from "../middlewares/friend.middleware.js";
 
 const friendRouter = express.Router();
 
@@ -23,6 +27,8 @@ friendRouter.get(
 friendRouter.put(
   "/friend-request/:id",
   isAuth,
+  checkRequestFriendExits,
+  checkRequestFriendResponse,
   responseFriendRequestController,
 );
 
