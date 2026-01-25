@@ -3,6 +3,7 @@ import { isAuth } from "../middlewares/auth.middleware.js";
 import {
   createFriendRequestController,
   deleteFriendRequestController,
+  deleteFriendsController,
   getFriendRequestsIncomingController as getFriendRequestsIncomingController,
   getFriendRequestsOutgoingController,
   getFriendsController,
@@ -58,5 +59,8 @@ friendRouter.delete(
 
 // get friends
 friendRouter.get("/friends", isAuth, getFriendsController);
+
+// delete friend
+friendRouter.delete("/friends/:id", isAuth, deleteFriendsController);
 
 export { friendRouter };

@@ -1,11 +1,13 @@
 import {
   createFriend,
   createFriendRequest,
-  deleteFriendRequest,
+  deleteFriendRequestById,
+  deleteFriendRequestByUserId,
   getFriendRequestsByFromUserId,
   getFriendRequestsByToUserId,
   getFriendShipsByUserId,
   responseFriendRequestById,
+  unfriendById,
 } from "../models/friend.model.js";
 import { getUser } from "../models/user.model.js";
 
@@ -117,7 +119,7 @@ export const responseFriendRequestController = async (req, res) => {
 export const deleteFriendRequestController = async (req, res) => {
   const { id } = req.params;
   try {
-    const request = await deleteFriendRequest(id);
+    const request = await deleteFriendRequestById(id);
     if (!request) return res.status(404).json({ message: "request not found" });
 
     res.json({ message: "friend request deleted" });
@@ -154,5 +156,21 @@ export const getFriendsController = async (req, res) => {
   } catch (e) {
     console.error("error from get friends", e);
     res.status(500).json({ message: "error from get friends" });
+  }
+};
+
+// delete friendship
+export const deleteFriendsController = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const friendship = await unfriendById(id);
+    if (!friendship) return res.status(404).json({ message: "friendship not found" });
+
+    await deleteFriendRequestByUserId(friendship.user_id1, friendship.user_id2);
+
+    res.json({ message: "friendship deleted" });
+  } catch (e) {
+    console.error("error from delete friendship", e);
+    res.status(500).json({ message: "error from delete friendship" });
   }
 };

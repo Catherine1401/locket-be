@@ -137,11 +137,24 @@ export const responseFriendRequestById = async (id, message) => {
 };
 
 // delete friend request
-export const deleteFriendRequest = async (id) => {
+export const deleteFriendRequestById = async (id) => {
   const query = {
     text: `DELETE FROM request_friends
             WHERE id = $1`,
     values: [id],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
+
+// delete friend request by userId
+export const deleteFriendRequestByUserId = async (userId1, userId2) => {
+  const query = {
+    text: `DELETE FROM request_friends
+            WHERE (from_user_id = $1 AND to_user_id = $2) 
+            OR (from_user_id = $2 AND to_user_id = $1)`,
+    values: [userId1, userId2],
   };
 
   const response = await pool.query(query);
@@ -192,3 +205,18 @@ export const unfriend = async (userId1, userId2) => {
   const response = await pool.query(query);
   return response.rows[0];
 };
+
+// unfriends by id
+export const unfriendById = async (id) => {
+  const query = {
+    text: `UPDATE friends
+          SET status = 'unfriend', updated_at = now()
+          WHERE id = $1 AND status = 'friend'
+          RETURNING *`,
+    values: [id]
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+}
+
