@@ -54,21 +54,9 @@ export const getUserByShareCodeController = async (req, res) => {
       avatarUrl: user.avatar_url,
       displayName: user.display_name,
     },
+    status: req.friendShip,
   };
 
-  let status = "unfriend";
-  if (await isSenderRequest(user.id, req.userId)) {
-    status = "pending";
-  }
-
-  if (await isReceiverRequest(user.id, req.userId)) {
-    status = "response";
-  }
-
-  if (await isFriend(user.id, req.userId)) {
-    status = "friend";
-  }
-
-  response.status = status;
   res.json(response);
 };
+

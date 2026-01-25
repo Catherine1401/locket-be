@@ -11,13 +11,14 @@ export const getFriendShips = async (userId) => {
   return response.rows;
 };
 
-// get freindship
+// get friendship
 export const getFriendShip = async (userId1, userId2) => {
   const query = {
-    text: `SELECT * FROM friends WHERE (user_id1 = $1 AND user_id2 = $2) OR (user_id1 = $2 AND user_id2 = $1)`,
+    text: `SELECt * FROM friends
+          WHERE (user_id1 = $1 AND user_id2 = $2) 
+          OR (user_id1 = $2 AND user_id2 = $1)`,
     values: [userId1, userId2],
   };
-
   const response = await pool.query(query);
   return response.rows[0];
 };
@@ -63,8 +64,32 @@ export const getFriendRequest = async (fromUserId, toUserId) => {
 
   const response = await pool.query(query);
   return response.rows[0];
-}
-  
+};
+
+// get friend request both
+export const getFriendRequestsBoth = async (userId1, userId2) => {
+  const query = {
+    text: `SELECT * FROM request_friends
+            WHERE (from_user_id = $1 AND to_user_id = $2) 
+            OR (from_user_id = $2 AND to_user_id = $1)`,
+    values: [userId1, userId2],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
+
+// get friend request by id
+export const getFriendRequestById = async (id) => {
+  const query = {
+    text: `SELECT * FROM request_friends
+            WHERE id = $1`,
+    values: [id],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
 
 // response request friend
 export const responseFriendRequest = async (fromUserId, toUserId, status) => {
@@ -87,7 +112,10 @@ export const createFriend = async (userId1, userId2) => {
   const query = {
     text: `INSERT INTO friends (user_id1, user_id2)
             VALUES ($1, $2)
-            ON CONFLICT 
+            ON CONFLICT (
+              LEAST(user_id1, user_id2),
+              GREATEST(user_id1, user_id2)
+            )
             DO NOTHING
             RETURNING *`,
     values: [userId1, userId2],
