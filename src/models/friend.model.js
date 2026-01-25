@@ -43,7 +43,7 @@ export const createFriendRequest = async (fromUserId, toUserId) => {
 };
 
 // get list friend request
-export const getFriendRequests = async (userId) => {
+export const getFriendRequestsByToUserId = async (userId) => {
   const query = {
     text: `SELECT * FROM request_friends
             WHERE to_user_id = $1 AND status = 'pending'`,

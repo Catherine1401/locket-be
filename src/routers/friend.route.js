@@ -15,7 +15,11 @@ friendRouter.post(
   checkUserExistsById,
   createFriendRequestController,
 );
-friendRouter.get("/friend-request", isAuth, getFriendRequestsController);
+friendRouter.get(
+  "/friend-request/incoming",
+  isAuth,
+  getFriendRequestsController,
+);
 friendRouter.put(
   "/friend-request/:id",
   isAuth,
