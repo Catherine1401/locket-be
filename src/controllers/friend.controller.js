@@ -6,11 +6,11 @@ import {
 } from "../models/friend.model.js";
 
 export const createFriendRequestController = async (req, res) => {
-  const { userId } = req;
+  const { userId: myId } = req;
   const { toUserId } = req.body;
 
   try {
-    const friendRequest = await createFriendRequest(userId, toUserId);
+    const friendRequest = await createFriendRequest(myId, toUserId);
 
     if (!friendRequest)
       return res.status(409).json({ message: "friend request already sended" });
@@ -23,7 +23,7 @@ export const createFriendRequestController = async (req, res) => {
 };
 
 export const getFriendRequestsController = async (req, res) => {
-  const { userId } = req;
+  const { userId } = req.body;
 
   try {
     const friendRequests = await getFriendRequests(userId);
