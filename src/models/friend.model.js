@@ -143,6 +143,18 @@ export const createFriend = async (userId1, userId2) => {
   return response.rows[0];
 };
 
+// get friendships by userId
+export const getFriendShipsByUserId = async (userId) => {
+  const query = {
+    text: `SELECT * FROM friends
+            WHERE user_id1 = $1 OR user_id2 = $1`,
+    values: [userId],
+  };
+
+  const response = await pool.query(query);
+  return response.rows;
+};
+
 // unfriend
 export const unfriend = async (userId1, userId2) => {
   const query = {

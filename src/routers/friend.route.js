@@ -3,6 +3,7 @@ import { isAuth } from "../middlewares/auth.middleware.js";
 import {
   createFriendRequestController,
   getFriendRequestsController,
+  getFriendsController,
   responseFriendRequestController,
 } from "../controllers/friend.controller.js";
 import { checkUserExistsById } from "../middlewares/user.middleware.js";
@@ -31,5 +32,6 @@ friendRouter.put(
   checkRequestFriendResponse,
   responseFriendRequestController,
 );
+friendRouter.get("/friends", isAuth, getFriendsController);
 
 export { friendRouter };

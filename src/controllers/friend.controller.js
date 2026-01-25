@@ -2,6 +2,7 @@ import {
   createFriend,
   createFriendRequest,
   getFriendRequestsByToUserId,
+  getFriendShipsByUserId,
   responseFriendRequest,
   responseFriendRequestById,
 } from "../models/friend.model.js";
@@ -74,5 +75,35 @@ export const responseFriendRequestController = async (req, res) => {
   } catch (e) {
     console.error("error from response friend request", e);
     res.status(500).json({ message: "error from response friend request" });
+  }
+};
+
+export const getFriendsController = async (req, res) => {
+  const { userId } = req;
+  try {
+    const friendships = await getFriendShipsByUserId(userId);
+    if (friendships.length === 0)
+      return res.status(404).json({ message: "no friendship found" });
+
+    const friends = await Promise.all(
+      friendships.map(async (friendship) => {
+        const partnerId =
+          friendship.user_id1 === userId
+            ? friendship.user_id2
+            : friendship.user_id1;
+        const partner = await getUser({ id: partnerId });
+        return {
+          id: friendship.id,
+          userId: partner.id,
+          name: partner.display_name,
+          avatar: partner.avatar_url,
+        };
+      }),
+    );
+
+    res.json(friends);
+  } catch (e) {
+    console.error("error from get friends", e);
+    res.status(500).json({ message: "error from get friends" });
   }
 };
