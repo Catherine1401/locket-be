@@ -105,10 +105,13 @@ export const responseFriendRequestController = async (req, res) => {
 
     if (message === "accept") {
       await createFriend(myId, request.from_user_id);
+
+      // đoạn này cần tạo 1 conversation
       res.json({ message: "friendship created" });
     } else if (message === "reject") {
       res.json({ message: "friend request rejected" });
     }
+    res.staus(409).json({ message: "request already accepted" });
   } catch (e) {
     console.error("error from response friend request", e);
     res.status(500).json({ message: "error from response friend request" });

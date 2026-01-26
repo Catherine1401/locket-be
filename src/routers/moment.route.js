@@ -12,6 +12,6 @@ const momentRouter = express.Router();
 momentRouter.post("/moments", isAuth, imageMiddleware, createMomentController);
 momentRouter.get("/moments/feed", isAuth);
 momentRouter.get("/users/:id/moments", isAuth);
-momentRouter.delete("/moments/:id", isAuth, isMyMoment, deleteMomentController);
+momentRouter.delete("/moments/:id", isAuth, deleteMomentController);
 
 export { momentRouter };

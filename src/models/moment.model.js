@@ -43,10 +43,12 @@ export const getMoment = async (field) => {
 };
 
 // delete moment
-export const deleteMoment = async (momentId) => {
+export const deleteMomentByIdAndUserId = async (momentId, userId) => {
   const query = {
-    text: "UPDATE moments SET deleted_at = now() WHERE id = $1 RETURNING *",
-    values: [momentId],
+    text: `UPDATE moments SET deleted_at = now()
+          WHERE id = $1 AND user_id = $2
+          RETURNING *`,
+    values: [momentId, userId],
   };
   const response = await pool.query(query);
   return response.rows[0];

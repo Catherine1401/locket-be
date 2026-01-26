@@ -1,4 +1,7 @@
-import { createMoment, deleteMoment } from "../models/moment.model.js";
+import {
+  createMoment,
+  deleteMomentByIdAndUserId,
+} from "../models/moment.model.js";
 
 export const createMomentController = async (req, res) => {
   try {
@@ -24,9 +27,16 @@ export const createMomentController = async (req, res) => {
 };
 
 export const deleteMomentController = async (req, res) => {
+  const { id } = req.params;
+  const { userId } = req;
   try {
-    const { id } = req.params;
-    const moment = await deleteMoment(id);
+    const moment = await deleteMomentByIdAndUserId(id, userId);
+
+    if (!moment)
+      return res
+        .status(404)
+        .json({ message: "moment not found or not your moment" });
+
     console.log("moment from delete moment", moment);
     res.json({ message: "moment deleted" });
   } catch (e) {
