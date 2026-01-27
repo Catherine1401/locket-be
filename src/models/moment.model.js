@@ -102,6 +102,25 @@ export const getMomentsByNextCursor = async (
   return response.rows;
 };
 
+// get moments by next cursor and userId
+export const getMomentsByNextCursorAndUserId = async (
+  nextCursor,
+  userId,
+  limit,
+) => {
+  const query = {
+    text: `SELECT * FROM moments
+            WHERE id < $2
+            AND user_id = $1
+            AND deleted_at IS NULL
+            ORDER BY id DESC
+            LIMIT $3`,
+    values: [userId, nextCursor, limit],
+  };
+  const response = await pool.query(query);
+  return response.rows;
+};
+
 export const getMomentsByPrevCursor = async (
   prevCursor,
   myId,
@@ -119,6 +138,31 @@ export const getMomentsByPrevCursor = async (
       LIMIT $4
     `,
     values: [friendIds, myId, prevCursor, limit],
+  };
+
+  const response = await pool.query(query);
+
+  // đảo lại để client luôn nhận DESC (mới → cũ)
+  return response.rows.reverse();
+};
+
+// get moments by prev cursor and userId
+export const getMomentsByPrevCursorAndUserId = async (
+  prevCursor,
+  userId,
+  limit,
+) => {
+  const query = {
+    text: `
+      SELECT *
+      FROM moments
+      WHERE id > $2
+        AND user_id = $1
+        AND deleted_at IS NULL
+      ORDER BY id ASC
+      LIMIT $3
+    `,
+    values: [userId, prevCursor, limit],
   };
 
   const response = await pool.query(query);
