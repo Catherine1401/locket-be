@@ -52,8 +52,9 @@ export const deleteMomentController = async (req, res) => {
 
 export const feedMomentController = async (req, res) => {
   // get info
-  const { limit, prevCursor, nextCursor } = req.query;
+  const { limit: limitString, prevCursor, nextCursor } = req.query;
   const { userId } = req;
+  const limit = parseInt(limitString);
   console.log("prevCursor", prevCursor);
   console.log("type of prevCursor", typeof prevCursor);
   console.log("nextCursor", nextCursor);
@@ -78,7 +79,7 @@ export const feedMomentController = async (req, res) => {
       const moments = await getMomentsByFriendIdAndMyId(
         friendIds,
         userId,
-        parseInt(limit),
+        limit,
       );
       if (moments.length === 0)
         return res.status(404).json({ message: "no moments found" });
@@ -107,7 +108,7 @@ export const feedMomentController = async (req, res) => {
         nextCursor,
         userId,
         friendIds,
-        parseInt(limit),
+        limit,
       );
       if (moments.length === 0)
         return res.status(404).json({ message: "no moments found" });
@@ -135,7 +136,7 @@ export const feedMomentController = async (req, res) => {
         prevCursor,
         userId,
         friendIds,
-        parseInt(limit),
+        limit,
       );
 
       if (moments.length === 0)
@@ -165,7 +166,7 @@ export const feedMomentController = async (req, res) => {
           .status(406)
           .json({ message: "nextCursor and prevCursor not equal" });
 
-      const halfLimit = parseInt(limit) / 2;
+      const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
         return res.status(404).json({ message: "no moments found" });
@@ -198,6 +199,137 @@ export const feedMomentController = async (req, res) => {
           caption: moment.caption,
           userId: moment.user_id,
           createdAt: moment.created_at,
+        };
+      });
+      const response = {
+        moments: responseMoments,
+        prevCursor: moments[0].id,
+        nextCursor: moments[moments.length - 1].id,
+        prevEnd: prevMoment.length === halfLimit - 1 ? false : true,
+        nextEnd: nextMoment.length === halfLimit ? false : true,
+      };
+      res.json(response);
+    } else {
+      res.status(404).json({ message: "error from feed moment" });
+    }
+  } catch (e) {
+    console.error("error from feed moment", e);
+    res.status(500).json({ message: "error from feed moment" });
+  }
+};
+
+export const gridMomentController = async (req, res) => {
+  // get info
+  const { limit: limitString, prevCursor, nextCursor } = req.query;
+  const { userId } = req;
+  const limit = parseInt(limitString);
+  console.log("prevCursor", prevCursor);
+  console.log("type of prevCursor", typeof prevCursor);
+  console.log("nextCursor", nextCursor);
+  console.log("type of nextCursor", typeof nextCursor);
+  console.log("limit", limit);
+  console.log("type of limit", typeof limit);
+  console.log("check", !prevCursor && !!nextCursor);
+
+  try {
+    // get friendIds
+    const friendships = await getFriendShipsByUserId(userId);
+    const friendIds = friendships.map((friendship) => {
+      return friendship.user_id1 === userId
+        ? friendship.user_id2
+        : friendship.user_id1;
+    });
+    console.log("friendships from feed moment", friendships);
+    console.log("friendIds from feed moment", friendIds);
+
+    // scroll down
+    if (!prevCursor && !!nextCursor) {
+      const moments = await getMomentsByNextCursor(
+        nextCursor,
+        userId,
+        friendIds,
+        limit,
+      );
+      if (moments.length === 0)
+        return res.status(404).json({ message: "no moments found" });
+      console.log("moments from feed moment", moments);
+
+      const responseMoments = moments.map((moment) => {
+        return {
+          id: moment.id,
+          thumbnail: moment.thumbnail,
+        };
+      });
+      const response = {
+        moments: responseMoments,
+        nextCursor: moments[moments.length - 1].id,
+        nextEnd: moments.length === limit ? false : true,
+      };
+      res.json(response);
+
+      // scroll up
+    } else if (!!prevCursor && !nextCursor) {
+      const moments = await getMomentsByPrevCursor(
+        prevCursor,
+        userId,
+        friendIds,
+        limit,
+      );
+
+      if (moments.length === 0)
+        return res.status(404).json({ message: "no moments found" });
+      console.log("moments from feed moment", moments);
+
+      const responseMoments = moments.map((moment) => {
+        return {
+          id: moment.id,
+          thumbnail: moment.thumbnail,
+        };
+      });
+      const response = {
+        moments: responseMoments,
+        prevCursor: moments[0].id,
+        prevEnd: moments.length === limit ? false : true,
+      };
+      res.json(response);
+
+      // first load
+    } else if (!!prevCursor && !!nextCursor) {
+      if (prevCursor !== nextCursor)
+        return res
+          .status(406)
+          .json({ message: "nextCursor and prevCursor not equal" });
+
+      const halfLimit = limit / 2;
+      const currentMoment = await getMomentById(prevCursor);
+      if (!currentMoment)
+        return res.status(404).json({ message: "no moments found" });
+
+      const nextMoment = await getMomentsByNextCursor(
+        nextCursor,
+        userId,
+        friendIds,
+        halfLimit,
+      );
+      if (nextMoment.length === 0)
+        return res.status(404).json({ message: "no moments found" });
+
+      const prevMoment = await getMomentsByPrevCursor(
+        prevCursor,
+        userId,
+        friendIds,
+        halfLimit - 1,
+      );
+      if (prevMoment.length === 0)
+        return res.status(404).json({ message: "no moments found" });
+
+      const moments = [...prevMoment, currentMoment, ...nextMoment];
+      console.log("moments from feed moment", moments);
+
+      const responseMoments = moments.map((moment) => {
+        return {
+          id: moment.id,
+          thumbnail: moment.thumbnail,
         };
       });
       const response = {

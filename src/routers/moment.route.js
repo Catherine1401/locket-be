@@ -4,6 +4,7 @@ import {
   createMomentController,
   deleteMomentController,
   feedMomentController,
+  gridMomentController,
 } from "../controllers/moment.controller.js";
 import { imageMiddleware } from "../middlewares/image.middleware.js";
 
@@ -12,9 +13,14 @@ const momentRouter = express.Router();
 // create moment
 momentRouter.post("/moments", isAuth, imageMiddleware, createMomentController);
 
-// get moment feed
+// get moments feed
 momentRouter.get("/moments/feed", isAuth, feedMomentController);
-momentRouter.get("/users/:id/moments", isAuth);
+
+// get moments grid
+momentRouter.get("/moments/grid", isAuth, gridMomentController);
+
+// get moments feed by user
+momentRouter.get("/users/:id/moments/feed", isAuth, );
 
 // delete moment
 momentRouter.delete("/moments/:id", isAuth, deleteMomentController);
