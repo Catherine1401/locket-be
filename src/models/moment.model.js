@@ -69,6 +69,19 @@ export const getMomentsByFriendIdAndMyId = async (friendIds, myId, limit) => {
   return response.rows;
 };
 
+export const getMomentsByUserId = async (userId, limit) => {
+  const query = {
+    text: `SELECT * FROM moments
+            WHERE user_id = $1
+            AND deleted_at IS NULL
+            ORDER BY id DESC
+            LIMIT $2`,
+    values: [userId, limit],
+  };
+  const response = await pool.query(query);
+  return response.rows;
+};
+
 // get moments by next cursor
 export const getMomentsByNextCursor = async (
   nextCursor,

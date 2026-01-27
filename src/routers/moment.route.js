@@ -20,7 +20,7 @@ momentRouter.get("/moments/feed", isAuth, feedMomentController);
 momentRouter.get("/moments/grid", isAuth, gridMomentController);
 
 // get moments feed by user
-momentRouter.get("/users/:id/moments/feed", isAuth, );
+momentRouter.get("/users/:id/moments/feed", isAuth, feed);
 
 // delete moment
 momentRouter.delete("/moments/:id", isAuth, deleteMomentController);

@@ -198,7 +198,9 @@ export const unfriend = async (userId1, userId2) => {
   const query = {
     text: `UPDATE friends
           SET status = 'unfriend', updated_at = now()
-          WHERE (user_id1 = $1 AND user_id2 = $2) OR (user_id1 = $2 AND user_id2 = $1)
+          WHERE ((user_id1 = $1 AND user_id2 = $2)
+          OR (user_id1 = $2 AND user_id2 = $1))
+          AND status = 'friend'
           RETURNING *`,
     values: [userId1, userId2],
   };
@@ -221,3 +223,15 @@ export const unfriendById = async (id) => {
   return response.rows[0];
 }
 
+// get friend by userId
+export const getFriendshipByUserId = async (userId1, userId2) => {
+  const query = {
+    text: `SELECT * FROM friends
+            WHERE (user_id1 = $1 AND user_id2 = $2) 
+            OR (user_id1 = $2 AND user_id2 = $1)`,
+    values: [userId1, userId2],
+  };
+
+  const response = await pool.query(query);
+  return response.rows[0];
+};
