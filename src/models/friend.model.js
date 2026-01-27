@@ -184,7 +184,8 @@ export const createFriend = async (userId1, userId2) => {
 export const getFriendShipsByUserId = async (userId) => {
   const query = {
     text: `SELECT * FROM friends
-            WHERE user_id1 = $1 OR user_id2 = $1`,
+            WHERE (user_id1 = $1 OR user_id2 = $1)
+            AND status = 'friend'`,
     values: [userId],
   };
 

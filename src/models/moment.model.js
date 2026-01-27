@@ -53,3 +53,73 @@ export const deleteMomentByIdAndUserId = async (momentId, userId) => {
   const response = await pool.query(query);
   return response.rows[0];
 };
+
+// get moments by friendId and myId
+export const getMomentsByFriendIdAndMyId = async (friendIds, myId, limit) => {
+  const query = {
+    text: `SELECT * FROM moments
+            WHERE (user_id = ANY($1) OR user_id = $2)
+            AND deleted_at IS NULL
+            ORDER BY id DESC
+            LIMIT $3`,
+
+    values: [friendIds, myId, limit],
+  };
+  const response = await pool.query(query);
+  return response.rows;
+};
+
+// get moments by next cursor
+export const getMomentsByNextCursor = async (
+  nextCursor,
+  myId,
+  friendIds,
+  limit,
+) => {
+  const query = {
+    text: `SELECT * FROM moments
+            WHERE  id < $3
+            AND (user_id = ANY($1) OR user_id = $2)
+            AND deleted_at IS NULL
+            ORDER BY id DESC 
+            LIMIT $4`,
+    values: [friendIds, myId, nextCursor, limit],
+  };
+  const response = await pool.query(query);
+  return response.rows;
+};
+
+export const getMomentsByPrevCursor = async (
+  prevCursor,
+  myId,
+  friendIds,
+  limit,
+) => {
+  const query = {
+    text: `
+      SELECT *
+      FROM moments
+      WHERE id > $3
+        AND (user_id = ANY($1) OR user_id = $2)
+        AND deleted_at IS NULL
+      ORDER BY id ASC
+      LIMIT $4
+    `,
+    values: [friendIds, myId, prevCursor, limit],
+  };
+
+  const response = await pool.query(query);
+
+  // đảo lại để client luôn nhận DESC (mới → cũ)
+  return response.rows.reverse();
+};
+
+export const getMomentById = async (id) => {
+  const query = {
+    text: `SELECT * FROM moments
+            WHERE id = $1`,
+    values: [id],
+  };
+  const response = await pool.query(query);
+  return response.rows[0];
+};
