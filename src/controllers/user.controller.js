@@ -1,9 +1,4 @@
 import { getUser, updateUser } from "../models/user.model.js";
-import {
-  isFriend,
-  isReceiverRequest,
-  isSenderRequest,
-} from "../utils/friend.util.js";
 
 export const getMe = async (req, res) => {
   const user = await getUser({ id: req.userId });
@@ -60,3 +55,39 @@ export const getUserByShareCodeController = async (req, res) => {
   res.json(response);
 };
 
+// update name
+export const updateName = async (req, res) => {
+  const { displayName } = req.body;
+  const { userId } = req;
+
+  try {
+    const user = await updateUser(userId, {
+      display_name: displayName,
+    });
+
+    if (!user) return res.status(409).json({ message: "some error" });
+
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
+
+export const updateBirthday = async (req, res) => {
+  const { birthday } = req.body;
+  const { userId } = req;
+
+  try {
+    const user = await updateUser(userId, {
+      birthday: birthday,
+    });
+
+    if (!user) return res.status(409).json({ message: "some error" });
+
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
