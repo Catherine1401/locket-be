@@ -1,4 +1,10 @@
 import { getUser, updateUser } from "../models/user.model.js";
+import {
+  deleteImage,
+  extractPublicId,
+  uploadAvatarBuffer,
+  uploadImage,
+} from "../utils/cloudinary.util.js";
 
 export const getMe = async (req, res) => {
   const user = await getUser({ id: req.userId });
@@ -88,6 +94,31 @@ export const updateBirthday = async (req, res) => {
     res.json(user);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
+
+export const updateAvatar = async (req, res) => {
+  const { userId } = req;
+  try {
+    if (!req.file) return res.status(400).json({ message: "no image provided" });
+
+    // Xoá avatar cũ trên Cloudinary (nếu có)
+    const currentUser = await getUser({ id: userId });
+    if (currentUser?.avatar_url) {
+      const oldPublicId = extractPublicId(currentUser.avatar_url);
+      if (oldPublicId) await deleteImage(oldPublicId);
+    }
+
+    // Upload ảnh mới từ buffer với transformations
+    const { secure_url } = await uploadAvatarBuffer(req.file.buffer);
+
+    const user = await updateUser(userId, { avatar_url: secure_url });
+    if (!user) return res.status(404).json({ message: "user not found" });
+
+    res.json({ avatarUrl: user.avatar_url });
+  } catch (error) {
+    console.error("error from updateAvatar", error);
     res.status(500).json({ message: "internal server error" });
   }
 };

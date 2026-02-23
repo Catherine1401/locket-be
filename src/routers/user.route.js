@@ -3,6 +3,7 @@ import { isAuth } from "../middlewares/auth.middleware.js";
 import {
   getMe,
   getUserByShareCodeController,
+  updateAvatar,
   updateBirthday,
   updateMe,
   updateName,
@@ -13,7 +14,7 @@ import {
   validateUserInfo,
 } from "../middlewares/validator.middleware.js";
 import { checkFriendShip } from "../middlewares/friend.middleware.js";
-import { imageMiddleware } from "../middlewares/image.middleware.js";
+import { imageMiddleware, avatarMiddleware } from "../middlewares/image.middleware.js";
 
 const userRouter = express.Router();
 
@@ -26,7 +27,7 @@ userRouter.put("/users/me/name", isAuth, validateName, updateName);
 userRouter.put("/users/me/birthday", isAuth, validateBirthday, updateBirthday);
 
 // update avatar
-userRouter.put("/users/me/avatar", isAuth, imageMiddleware);
+userRouter.put("/users/me/avatar", isAuth, avatarMiddleware, updateAvatar);
 
 userRouter.get(
   "/users/:sharecode",
