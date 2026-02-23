@@ -27,7 +27,7 @@ SET DEFAULT translate(
 CREATE TABLE moments (
   id serial PRIMARY KEY,
   image_url text NOT NULL,
-  thumbnail_url text NOT NULL,
+  thumbnail text NOT NULL,
   image_public_id text NOT NULL,
   caption text,
   user_id uuid NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE friends (
   user_id2 uuid NOT NULL,
   status friend_status default 'friend',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  last_updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Foreign Key
