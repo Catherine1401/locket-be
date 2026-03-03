@@ -20,7 +20,7 @@ const friendRouter = express.Router();
 
 // create friend request
 friendRouter.post(
-  "/friend-request",
+  "/friend-requests",
   isAuth,
   checkUserExistsById,
   createFriendRequestController,
@@ -28,21 +28,21 @@ friendRouter.post(
 
 // get friend request
 friendRouter.get(
-  "/friend-request/incoming",
+  "/friend-requests/incoming",
   isAuth,
   getFriendRequestsIncomingController,
 );
 
 // get friend request outgoing
 friendRouter.get(
-  "/friend-request/outgoing",
+  "/friend-requests/outgoing",
   isAuth,
   getFriendRequestsOutgoingController,
 );
 
 // response friend request
 friendRouter.put(
-  "/friend-request/:id",
+  "/friend-requests/:id",
   isAuth,
   checkRequestFriendExits,
   checkRequestFriendResponse,
@@ -51,7 +51,7 @@ friendRouter.put(
 
 // delete friend request
 friendRouter.delete(
-  "/friend-request/:id",
+  "/friend-requests/:id",
   isAuth,
   isSenderRequestMiddleware,
   deleteFriendRequestController,

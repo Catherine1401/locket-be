@@ -22,23 +22,23 @@ export const checkFriendShip = async (req, res, next) => {
   const friendShip = await getFriendShip(userId, targetUserId);
   if (friendShip && friendShip.status === "friend") {
     req.friendShip = "friend";
-    next();
+    return next();
   }
 
   // check friend request
   const friendRequest = await getFriendRequestsBoth(userId, targetUserId);
   if (friendRequest) {
     if (friendRequest.from_user_id === userId) {
-      req.friendShip = "incoming";
-      next();
-    } else if (friendRequest.to_user_id === userId) {
       req.friendShip = "outgoing";
-      next();
+      return next();
+    } else if (friendRequest.to_user_id === userId) {
+      req.friendShip = "incoming";
+      return next();
     }
   }
 
   req.friendShip = "stranger";
-  next();
+  return next();
 };
 
 // check request friend
