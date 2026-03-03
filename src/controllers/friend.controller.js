@@ -105,13 +105,13 @@ export const responseFriendRequestController = async (req, res) => {
 
     if (message === "accept") {
       await createFriend(myId, request.from_user_id);
-
-      // đoạn này cần tạo 1 conversation
-      res.json({ message: "friendship created" });
+      // TODO: tạo 1 conversation
+      return res.json({ message: "friendship created" });
     } else if (message === "reject") {
-      res.json({ message: "friend request rejected" });
+      return res.json({ message: "friend request rejected" });
     }
-    res.staus(409).json({ message: "request already accepted" });
+
+    return res.status(400).json({ message: "invalid message value" });
   } catch (e) {
     console.error("error from response friend request", e);
     res.status(500).json({ message: "error from response friend request" });
@@ -136,8 +136,7 @@ export const getFriendsController = async (req, res) => {
   const { userId } = req;
   try {
     const friendships = await getFriendShipsByUserId(userId);
-    if (friendships.length === 0)
-      return res.status(404).json({ message: "no friendship found" });
+    if (friendships.length === 0) return res.json([]);
 
     const friends = await Promise.all(
       friendships.map(async (friendship) => {
