@@ -3,17 +3,28 @@ import { getUser } from "./user.model.js";
 
 // Tạo hoặc lấy conversation đã tồn tại giữa 2 user
 export const getOrCreateConversation = async (userId1, userId2) => {
-  const query = {
+  // Tìm conversation đã tồn tại (dùng LEAST/GREATEST để không phân biệt thứ tự)
+  const selectQuery = {
+    text: `
+      SELECT * FROM conversations
+      WHERE user_id1 = LEAST($1::uuid, $2::uuid)
+        AND user_id2 = GREATEST($1::uuid, $2::uuid)
+    `,
+    values: [userId1, userId2],
+  };
+  const existing = await pool.query(selectQuery);
+  if (existing.rows[0]) return existing.rows[0];
+
+  // Tạo mới nếu chưa có
+  const insertQuery = {
     text: `
       INSERT INTO conversations (user_id1, user_id2)
       VALUES (LEAST($1::uuid, $2::uuid), GREATEST($1::uuid, $2::uuid))
-      ON CONFLICT (LEAST(user_id1, user_id2), GREATEST(user_id1, user_id2))
-      DO UPDATE SET id = conversations.id
       RETURNING *
     `,
     values: [userId1, userId2],
   };
-  const response = await pool.query(query);
+  const response = await pool.query(insertQuery);
   return response.rows[0];
 };
 
