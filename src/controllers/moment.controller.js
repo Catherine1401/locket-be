@@ -183,8 +183,6 @@ export const feedMomentController = async (req, res) => {
         friendIds,
         halfLimit,
       );
-      if (nextMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursor(
         prevCursor,
@@ -192,8 +190,6 @@ export const feedMomentController = async (req, res) => {
         friendIds,
         halfLimit - 1,
       );
-      if (prevMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -248,8 +244,29 @@ export const gridMomentController = async (req, res) => {
     console.log("friendships from feed moment", friendships);
     console.log("friendIds from feed moment", friendIds);
 
-    // scroll down
-    if (!prevCursor && !!nextCursor) {
+    // first load
+    if (!prevCursor && !nextCursor) {
+      const moments = await getMomentsByFriendIdAndMyId(friendIds, userId, limit);
+      if (moments.length === 0)
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
+      console.log("moments from feed moment", moments);
+
+      const responseMoments = moments.map((moment) => {
+        return {
+          id: moment.id,
+          thumbnail: moment.thumbnail,
+        };
+      });
+      const response = {
+        moments: responseMoments,
+        nextCursor: moments[moments.length - 1].id,
+        prevEnd: true,
+        nextEnd: moments.length === limit ? false : true,
+      };
+      res.json(response);
+
+      // scroll down
+    } else if (!prevCursor && !!nextCursor) {
       const moments = await getMomentsByNextCursor(
         nextCursor,
         userId,
@@ -317,8 +334,6 @@ export const gridMomentController = async (req, res) => {
         friendIds,
         halfLimit,
       );
-      if (nextMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursor(
         prevCursor,
@@ -326,8 +341,6 @@ export const gridMomentController = async (req, res) => {
         friendIds,
         halfLimit - 1,
       );
-      if (prevMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -473,8 +486,6 @@ export const feedMomentByUserController = async (req, res) => {
         partnerId,
         halfLimit,
       );
-      if (nextMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
@@ -482,8 +493,6 @@ export const feedMomentByUserController = async (req, res) => {
         halfLimit - 1,
       );
 
-      if (prevMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -538,8 +547,29 @@ export const gridMomentByUserController = async (req, res) => {
     if (!friendship)
       return res.status(404).json({ message: "no friendship found" });
 
-    // scroll down
-    if (!prevCursor && !!nextCursor) {
+    // first load
+    if (!prevCursor && !nextCursor) {
+      const moments = await getMomentsByUserId(partnerId, limit);
+      if (moments.length === 0)
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
+      console.log("moments from feed moment", moments);
+
+      const responseMoments = moments.map((moment) => {
+        return {
+          id: moment.id,
+          thumbnail: moment.thumbnail,
+        };
+      });
+      const response = {
+        moments: responseMoments,
+        nextCursor: moments[moments.length - 1].id,
+        prevEnd: true,
+        nextEnd: moments.length === limit ? false : true,
+      };
+      res.json(response);
+
+      // scroll down
+    } else if (!prevCursor && !!nextCursor) {
       const moments = await getMomentsByNextCursorAndUserId(
         nextCursor,
         partnerId,
@@ -602,15 +632,11 @@ export const gridMomentByUserController = async (req, res) => {
         partnerId,
         halfLimit,
       );
-      if (nextMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
         partnerId,
         halfLimit - 1,
       );
-      if (prevMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
       const responseMoments = moments.map((moment) => {
@@ -747,16 +773,12 @@ export const feedMomentByMeController = async (req, res) => {
         myId,
         halfLimit,
       );
-      if (nextMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
         myId,
         halfLimit - 1,
       );
-      if (prevMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -802,8 +824,29 @@ export const gridMomentByMeController = async (req, res) => {
   console.log("check", !prevCursor && !!nextCursor);
 
   try {
-    // scroll down
-    if (!prevCursor && !!nextCursor) {
+    // first load
+    if (!prevCursor && !nextCursor) {
+      const moments = await getMomentsByUserId(myId, limit);
+      if (moments.length === 0)
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
+      console.log("moments from feed moment", moments);
+
+      const responseMoments = moments.map((moment) => {
+        return {
+          id: moment.id,
+          thumbnail: moment.thumbnail,
+        };
+      });
+      const response = {
+        moments: responseMoments,
+        nextCursor: moments[moments.length - 1].id,
+        prevEnd: true,
+        nextEnd: moments.length === limit ? false : true,
+      };
+      res.json(response);
+
+      // scroll down
+    } else if (!prevCursor && !!nextCursor) {
       const moments = await getMomentsByNextCursorAndUserId(
         nextCursor,
         myId,
@@ -868,16 +911,12 @@ export const gridMomentByMeController = async (req, res) => {
         myId,
         halfLimit,
       );
-      if (nextMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
         myId,
         halfLimit - 1,
       );
-      if (prevMoment.length === 0)
-        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
