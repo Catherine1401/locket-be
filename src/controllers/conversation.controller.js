@@ -135,6 +135,10 @@ export const sendMessageController = async (req, res) => {
 
             // 2. Emit tới personal room của receiver → cho ConversationsScreen / bất kỳ màn hình nào
             io.to(`user:${receiverId}`).emit("new_message", messageData);
+
+            // 3. Emit tới personal room của sender → để ConversationsScreen của sender
+            //    cũng cập nhật lastMessage ngay lập tức
+            io.to(`user:${senderId}`).emit("new_message", messageData);
         } catch (_) {
             // Socket.IO không bắt buộc phải được init (dev mode)
         }

@@ -321,3 +321,7 @@ Node.js v25.6.1
 [32m[nodemon] restarting due to changes...[39m
 [32m[nodemon] starting `node app.js`[39m
 Server listening on port 3000 with Socket.IO
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node app.js`[39m
+Server listening on port 3000 with Socket.IO
