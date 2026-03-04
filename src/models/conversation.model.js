@@ -6,7 +6,7 @@ export const getOrCreateConversation = async (userId1, userId2) => {
   const query = {
     text: `
       INSERT INTO conversations (user_id1, user_id2)
-      VALUES (LEAST($1, $2), GREATEST($1, $2))
+      VALUES (LEAST($1::uuid, $2::uuid), GREATEST($1::uuid, $2::uuid))
       ON CONFLICT (LEAST(user_id1, user_id2), GREATEST(user_id1, user_id2))
       DO UPDATE SET id = conversations.id
       RETURNING *

@@ -229,3 +229,92 @@ payload from isAuth {
 [32m[nodemon] restarting due to changes...[39m
 [32m[nodemon] starting `node app.js`[39m
 Server listening on port 3000 with Socket.IO
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NTI5NjksImV4cCI6MTc3NTI0NDk2OX0.v2btkC-LwtHVh16D2DQjmnuUf4EEoi7GF2wigY-rpPs
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772652969,
+  exp: 1775244969
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NTI5NjksImV4cCI6MTc3NTI0NDk2OX0.v2btkC-LwtHVh16D2DQjmnuUf4EEoi7GF2wigY-rpPs
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772652969,
+  exp: 1775244969
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+error from getConversationsController error: column "user_id1" is of type uuid but expression is of type text
+    at /home/hw/locket-be/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async getOrCreateConversation (file:///home/hw/locket-be/src/models/conversation.model.js:16:20)
+    at async Promise.all (index 0)
+    at async getConversationsByUserId (file:///home/hw/locket-be/src/models/conversation.model.js:35:3)
+    at async getConversationsController (file:///home/hw/locket-be/src/controllers/conversation.controller.js:17:31) {
+  length: 190,
+  severity: 'ERROR',
+  code: '42804',
+  detail: undefined,
+  hint: 'You will need to rewrite or cast the expression.',
+  position: '69',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_target.c',
+  line: '588',
+  routine: 'transformAssignedExpr'
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node app.js`[39m
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:2016:16)
+    at listenInCluster (node:net:2073:12)
+    at Server.listen (node:net:2178:7)
+    at file:///home/hw/locket-be/app.js:25:12
+    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:655:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:2052:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v25.6.1
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
