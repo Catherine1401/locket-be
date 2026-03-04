@@ -10,6 +10,7 @@ import {
   unfriendById,
 } from "../models/friend.model.js";
 import { getUser } from "../models/user.model.js";
+import { getOrCreateConversation } from "../models/conversation.model.js";
 
 export const createFriendRequestController = async (req, res) => {
   const { userId: myId } = req;
@@ -101,7 +102,7 @@ export const responseFriendRequestController = async (req, res) => {
 
     if (message === "accept") {
       await createFriend(myId, request.from_user_id);
-      // TODO: tạo 1 conversation
+      await getOrCreateConversation(myId, request.from_user_id);
       return res.json({ message: "friendship created" });
     } else if (message === "reject") {
       return res.json({ message: "friend request rejected" });

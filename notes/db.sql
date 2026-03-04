@@ -113,3 +113,52 @@ DROP TABLE users;
 SELECT * FROM users;
 
 DELETE FROM users;
+
+-- create conversations
+CREATE TABLE conversations (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id1 uuid NOT NULL,
+  user_id2 uuid NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE conversations
+ADD CONSTRAINT fk_conversations_user1
+FOREIGN KEY (user_id1)
+REFERENCES users(id)
+ON DELETE RESTRICT;
+
+ALTER TABLE conversations
+ADD CONSTRAINT fk_conversations_user2
+FOREIGN KEY (user_id2)
+REFERENCES users(id)
+ON DELETE RESTRICT;
+
+CREATE UNIQUE INDEX unique_conversations_pair_unordered
+ON conversations (
+  LEAST(user_id1, user_id2),
+  GREATEST(user_id1, user_id2)
+);
+
+-- create messages
+CREATE TABLE messages (
+  id serial PRIMARY KEY,
+  conversation_id uuid NOT NULL,
+  sender_id uuid NOT NULL,
+  content text NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE,
+  deleted_at TIMESTAMP WITH TIME ZONE
+);
+
+ALTER TABLE messages
+ADD CONSTRAINT fk_messages_conversation
+FOREIGN KEY (conversation_id)
+REFERENCES conversations(id)
+ON DELETE RESTRICT;
+
+ALTER TABLE messages
+ADD CONSTRAINT fk_messages_sender
+FOREIGN KEY (sender_id)
+REFERENCES users(id)
+ON DELETE RESTRICT;
