@@ -18,7 +18,27 @@ export const getOrCreateConversation = async (userId1, userId2) => {
 };
 
 // Lấy tất cả conversations của một user, kèm tin nhắn cuối và thông tin partner
+// Tự động tạo conversation cho các bạn bè chưa có conversation
 export const getConversationsByUserId = async (userId) => {
+  // Bước 1: Đảm bảo tất cả bạn bè đều có conversation (getOrCreate)
+  const friendsQuery = {
+    text: `
+      SELECT
+        CASE WHEN user_id1 = $1 THEN user_id2 ELSE user_id1 END AS friend_id
+      FROM friends
+      WHERE (user_id1 = $1 OR user_id2 = $1)
+        AND status = 'friend'
+    `,
+    values: [userId],
+  };
+  const friendsResult = await pool.query(friendsQuery);
+  await Promise.all(
+    friendsResult.rows.map((row) =>
+      getOrCreateConversation(userId, row.friend_id)
+    )
+  );
+
+  // Bước 2: Lấy tất cả conversations với tin nhắn cuối
   const query = {
     text: `
       SELECT

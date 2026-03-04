@@ -159,3 +159,73 @@ Server listening on port 3000 with Socket.IO
 [32m[nodemon] restarting due to changes...[39m
 [32m[nodemon] starting `node app.js`[39m
 Server listening on port 3000 with Socket.IO
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+idToken from google eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDdmNTFhZjJhMTYyNDY3MDc0ODQ2NzRhNDJhZTNjMmI2MjMxOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI4OTIxMzUwMDM3MDMtbm1yMGp0OXE0cWgxbmtsdW9pMGNtYXVwNjM4aWVkcW8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI4OTIxMzUwMDM3MDMtYWFocTc5MWFkYTY5bW9oamtmNDhmZWZ2NjN1ODUyc2QuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA1MDg4NDA1NTgzNDgwMzA0NTAiLCJoZCI6InN0LnBoZW5pa2FhLXVuaS5lZHUudm4iLCJlbWFpbCI6IjIzMDEwNjk5QHN0LnBoZW5pa2FhLXVuaS5lZHUudm4iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ikh1eSBWdSBWaWV0IiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xFWldHdE5zMFU1VDZjNWZLTTZydHJyaHdfYWRMdVdaa3hFMGhKbjVKQWQydzdWRG89czk2LWMiLCJnaXZlbl9uYW1lIjoiSHV5IiwiZmFtaWx5X25hbWUiOiJWdSBWaWV0IiwiaWF0IjoxNzcyNjUzMzQyLCJleHAiOjE3NzI2NTY5NDJ9.MVbMkv1VXNpxhfjD1Lk_rSPcq1RD02wMMldZGUE-L75EPvoLSZ8HebmNCiLavpCRVEF5BWXJEO098xd8fSml6WDXBdFCW4MMZMIwUu1_ZURIjgDiSlOMrftGZRrKB93q7-tf0EP9p2ivSmt6ExuU024MnBAblHTBBmfiugrqfUbk9U6O3uLfaUdRAHQxaPORqfAmGNzHMroMY27yCpsnu3C4pY-_t7-8BADvySkxmrCvFr5SarUpMrVwQEv6xU8qrQ6pvoA00bkjTmzG2pnez2V8-K3exKpO111k6W211YUaixyz-JP7geoefbsa2CZYLj4T88fm4P5n1KKVwoKSFw
+sub 110508840558348030450
+email 23010699@st.phenikaa-uni.edu.vn
+picture https://lh3.googleusercontent.com/a/ACg8ocLEZWGtNs0U5T6c5fKM6rtrrhw_adLuWZkxE0hJn5JAd2w7VDo=s96-c
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NTI5NjksImV4cCI6MTc3NTI0NDk2OX0.v2btkC-LwtHVh16D2DQjmnuUf4EEoi7GF2wigY-rpPs
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772652969,
+  exp: 1775244969
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node app.js`[39m
+Server listening on port 3000 with Socket.IO
