@@ -2,6 +2,7 @@ import {
     getConversationsByUserId,
     getConversationById,
     getOrCreateConversation,
+    markConversationRead,
 } from "../models/conversation.model.js";
 import {
     createMessage,
@@ -14,6 +15,7 @@ export const getConversationsController = async (req, res) => {
     const { userId } = req;
     try {
         const conversations = await getConversationsByUserId(userId);
+        // isUnread đã được tính toán trong model
         res.json(conversations);
     } catch (e) {
         console.error("error from getConversationsController", e);
@@ -130,5 +132,26 @@ export const sendMessageController = async (req, res) => {
     } catch (e) {
         console.error("error from sendMessageController", e);
         res.status(500).json({ message: "error from send message" });
+    }
+};
+
+// PUT /conversations/:id/read — Đánh dấu đã đọc
+export const markReadController = async (req, res) => {
+    const { userId } = req;
+    const { id: conversationId } = req.params;
+
+    try {
+        const conversation = await getConversationById(conversationId);
+        if (!conversation) return res.status(404).json({ message: "not found" });
+
+        const isParticipant =
+            conversation.user_id1 === userId || conversation.user_id2 === userId;
+        if (!isParticipant) return res.status(403).json({ message: "forbidden" });
+
+        await markConversationRead(conversationId, userId);
+        res.sendStatus(204);
+    } catch (e) {
+        console.error("error from markReadController", e);
+        res.status(500).json({ message: "internal server error" });
     }
 };

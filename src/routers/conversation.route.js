@@ -4,6 +4,7 @@ import {
     getConversationsController,
     getMessagesController,
     sendMessageController,
+    markReadController,
 } from "../controllers/conversation.controller.js";
 
 const conversationRouter = express.Router();
@@ -20,5 +21,8 @@ conversationRouter.get(
 
 // Gửi tin nhắn
 conversationRouter.post("/messages", isAuth, sendMessageController);
+
+// Đánh dấu conversation đã đọc
+conversationRouter.put("/conversations/:id/read", isAuth, markReadController);
 
 export { conversationRouter };
