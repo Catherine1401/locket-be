@@ -1,9 +1,11 @@
+import { createServer } from "http";
 import express from "express";
 import { authRouter } from "./src/routers/auth.route.js";
 import { userRouter } from "./src/routers/user.route.js";
 import { momentRouter } from "./src/routers/moment.route.js";
 import { friendRouter } from "./src/routers/friend.route.js";
 import { conversationRouter } from "./src/routers/conversation.route.js";
+import { initSocket } from "./src/socket/socket.js";
 
 const app = express();
 const port = process.env.PORT ?? 3000;
@@ -17,6 +19,9 @@ app.use(momentRouter);
 app.use(friendRouter);
 app.use(conversationRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+const httpServer = createServer(app);
+initSocket(httpServer);
+
+httpServer.listen(port, () => {
+  console.log(`Server listening on port ${port} with Socket.IO`);
 });

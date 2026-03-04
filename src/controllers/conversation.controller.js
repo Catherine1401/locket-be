@@ -7,6 +7,7 @@ import {
     createMessage,
     getMessagesByConversationId,
 } from "../models/message.model.js";
+import { getIO } from "../socket/socket.js";
 
 // GET /conversations/me — Lấy danh sách conversations của user hiện tại
 export const getConversationsController = async (req, res) => {
@@ -108,7 +109,7 @@ export const sendMessageController = async (req, res) => {
             replyToMomentId
         );
 
-        res.status(201).json({
+        const messageData = {
             id: message.id.toString(),
             conversationId: message.conversation_id.toString(),
             senderId: message.sender_id.toString(),
@@ -116,7 +117,16 @@ export const sendMessageController = async (req, res) => {
             createdAt: message.created_at,
             isDeleted: false,
             replyToMoment: replyToMomentId ? { id: replyToMomentId.toString() } : null
-        });
+        };
+
+        // Emit realtime tới tất cả clients trong room của conversation
+        try {
+            getIO().to(`conversation:${conversationId}`).emit("new_message", messageData);
+        } catch (_) {
+            // Socket.IO không bắt buộc phải được init (dev mode)
+        }
+
+        res.status(201).json(messageData);
     } catch (e) {
         console.error("error from sendMessageController", e);
         res.status(500).json({ message: "error from send message" });
