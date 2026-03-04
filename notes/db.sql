@@ -145,6 +145,7 @@ CREATE TABLE messages (
   id serial PRIMARY KEY,
   conversation_id uuid NOT NULL,
   sender_id uuid NOT NULL,
+  reply_to_moment_id integer,
   content text NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE,
@@ -162,3 +163,9 @@ ADD CONSTRAINT fk_messages_sender
 FOREIGN KEY (sender_id)
 REFERENCES users(id)
 ON DELETE RESTRICT;
+
+ALTER TABLE messages
+ADD CONSTRAINT fk_messages_moment
+FOREIGN KEY (reply_to_moment_id)
+REFERENCES moments(id)
+ON DELETE SET NULL;

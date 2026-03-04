@@ -50,14 +50,24 @@ export const getMessagesController = async (req, res) => {
         const hasMore = messages.length === parseInt(limit);
 
         res.json({
-            messages: messages.map((m) => ({
-                id: m.id.toString(),
-                conversationId: m.conversation_id.toString(),
-                senderId: m.sender_id.toString(),
-                content: m.content,
-                createdAt: m.created_at,
-                isDeleted: m.deleted_at !== null,
-            })),
+            messages: messages.map((m) => {
+                const isReply = m.reply_to_moment_id !== null;
+                return {
+                    id: m.id.toString(),
+                    conversationId: m.conversation_id.toString(),
+                    senderId: m.sender_id.toString(),
+                    content: m.content,
+                    createdAt: m.created_at,
+                    isDeleted: m.deleted_at !== null,
+                    replyToMoment: isReply ? {
+                        id: m.reply_to_moment_id.toString(),
+                        imageUrl: m.moment_image_url,
+                        createdAt: m.moment_created_at,
+                        authorName: m.moment_author_name,
+                        authorAvatar: m.moment_author_avatar
+                    } : null
+                };
+            }),
             nextCursor: hasMore ? nextCursor : null,
         });
     } catch (e) {
@@ -69,7 +79,7 @@ export const getMessagesController = async (req, res) => {
 // POST /messages — Gửi tin nhắn
 export const sendMessageController = async (req, res) => {
     const { userId: senderId } = req;
-    const { conversationId, content } = req.body;
+    const { conversationId, content, replyToMomentId } = req.body;
 
     if (!conversationId || !content || content.trim() === "") {
         return res
@@ -94,7 +104,8 @@ export const sendMessageController = async (req, res) => {
         const message = await createMessage(
             conversationId,
             senderId,
-            content.trim()
+            content.trim(),
+            replyToMomentId
         );
 
         res.status(201).json({
@@ -104,6 +115,7 @@ export const sendMessageController = async (req, res) => {
             content: message.content,
             createdAt: message.created_at,
             isDeleted: false,
+            replyToMoment: replyToMomentId ? { id: replyToMomentId.toString() } : null
         });
     } catch (e) {
         console.error("error from sendMessageController", e);

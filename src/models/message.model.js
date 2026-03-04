@@ -1,34 +1,46 @@
 import { pool } from "../config/db.js";
 
 // Tạo tin nhắn mới
-export const createMessage = async (conversationId, senderId, content) => {
+export const createMessage = async (conversationId, senderId, content, replyToMomentId = null) => {
     const query = {
         text: `
-      INSERT INTO messages (conversation_id, sender_id, content)
-      VALUES ($1, $2, $3)
+      INSERT INTO messages (conversation_id, sender_id, content, reply_to_moment_id)
+      VALUES ($1, $2, $3, $4)
       RETURNING *
     `,
-        values: [conversationId, senderId, content],
+        values: [conversationId, senderId, content, replyToMomentId],
     };
     const response = await pool.query(query);
     return response.rows[0];
 };
 
 // Lấy tin nhắn theo conversationId, cursor-based (nextCursor = id nhỏ hơn → cũ hơn)
+// JOIN để lấy thêm thông tin nếu tin nhắn đó reply tới một moment (ảnh, thông tin ng tạo moment)
 export const getMessagesByConversationId = async (
     conversationId,
     limit = 30,
     nextCursor = null
 ) => {
     let query;
+    const baseSelect = `
+        SELECT m.*, 
+               mo.image_url as moment_image_url, 
+               mo.created_at as moment_created_at,
+               u.display_name as moment_author_name,
+               u.avatar_url as moment_author_avatar
+        FROM messages m
+        LEFT JOIN moments mo ON m.reply_to_moment_id = mo.id
+        LEFT JOIN users u ON mo.user_id = u.id
+    `;
+
     if (nextCursor) {
         query = {
             text: `
-        SELECT * FROM messages
-        WHERE conversation_id = $1
-          AND deleted_at IS NULL
-          AND id < $3
-        ORDER BY id DESC
+        ${baseSelect}
+        WHERE m.conversation_id = $1
+          AND m.deleted_at IS NULL
+          AND m.id < $3
+        ORDER BY m.id DESC
         LIMIT $2
       `,
             values: [conversationId, limit, nextCursor],
@@ -36,10 +48,10 @@ export const getMessagesByConversationId = async (
     } else {
         query = {
             text: `
-        SELECT * FROM messages
-        WHERE conversation_id = $1
-          AND deleted_at IS NULL
-        ORDER BY id DESC
+        ${baseSelect}
+        WHERE m.conversation_id = $1
+          AND m.deleted_at IS NULL
+        ORDER BY m.id DESC
         LIMIT $2
       `,
             values: [conversationId, limit],
