@@ -33,8 +33,7 @@ export const getFriendRequestsIncomingController = async (req, res) => {
 
   try {
     const friendRequests = await getFriendRequestsByToUserId(userId);
-    if (friendRequests.length === 0)
-      return res.status(404).json({ message: "no friend request found" });
+    if (friendRequests.length === 0) return res.json([]);
 
     const senders = await Promise.all(
       friendRequests.map(async (request) => {
@@ -50,8 +49,7 @@ export const getFriendRequestsIncomingController = async (req, res) => {
     );
 
     console.log("senders from getFriendRequestsByToUserId", senders);
-    if (senders.length === 0)
-      return res.status(404).json({ message: "no friend request" });
+    if (senders.length === 0) return res.json([]);
 
     res.json(senders);
   } catch (e) {
@@ -66,8 +64,7 @@ export const getFriendRequestsOutgoingController = async (req, res) => {
 
   try {
     const friendRequests = await getFriendRequestsByFromUserId(userId);
-    if (friendRequests.length === 0)
-      return res.status(404).json({ message: "no friend request found" });
+    if (friendRequests.length === 0) return res.json([]);
 
     const receivers = await Promise.all(
       friendRequests.map(async (request) => {
@@ -83,8 +80,7 @@ export const getFriendRequestsOutgoingController = async (req, res) => {
     );
 
     console.log("receivers from getFriendRequestsByToUserId", receivers);
-    if (receivers.length === 0)
-      return res.status(404).json({ message: "no friend request" });
+    if (receivers.length === 0) return res.json([]);
 
     res.json(receivers);
   } catch (e) {
