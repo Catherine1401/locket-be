@@ -88,7 +88,7 @@ export const feedMomentController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -117,7 +117,7 @@ export const feedMomentController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -146,7 +146,7 @@ export const feedMomentController = async (req, res) => {
       );
 
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -175,7 +175,7 @@ export const feedMomentController = async (req, res) => {
       const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const nextMoment = await getMomentsByNextCursor(
         nextCursor,
@@ -184,7 +184,7 @@ export const feedMomentController = async (req, res) => {
         halfLimit,
       );
       if (nextMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursor(
         prevCursor,
@@ -193,7 +193,7 @@ export const feedMomentController = async (req, res) => {
         halfLimit - 1,
       );
       if (prevMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -257,7 +257,7 @@ export const gridMomentController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -283,7 +283,7 @@ export const gridMomentController = async (req, res) => {
       );
 
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -309,7 +309,7 @@ export const gridMomentController = async (req, res) => {
       const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const nextMoment = await getMomentsByNextCursor(
         nextCursor,
@@ -318,7 +318,7 @@ export const gridMomentController = async (req, res) => {
         halfLimit,
       );
       if (nextMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursor(
         prevCursor,
@@ -327,7 +327,7 @@ export const gridMomentController = async (req, res) => {
         halfLimit - 1,
       );
       if (prevMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -381,7 +381,7 @@ export const feedMomentByUserController = async (req, res) => {
     if (!prevCursor && !nextCursor) {
       const moments = await getMomentsByUserId(partnerId, limit);
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -409,7 +409,7 @@ export const feedMomentByUserController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -437,7 +437,7 @@ export const feedMomentByUserController = async (req, res) => {
       );
 
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -466,7 +466,7 @@ export const feedMomentByUserController = async (req, res) => {
       const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const nextMoment = await getMomentsByNextCursorAndUserId(
         nextCursor,
@@ -474,7 +474,7 @@ export const feedMomentByUserController = async (req, res) => {
         halfLimit,
       );
       if (nextMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
@@ -483,7 +483,7 @@ export const feedMomentByUserController = async (req, res) => {
       );
 
       if (prevMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -546,7 +546,7 @@ export const gridMomentByUserController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -571,7 +571,7 @@ export const gridMomentByUserController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -596,21 +596,21 @@ export const gridMomentByUserController = async (req, res) => {
       const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       const nextMoment = await getMomentsByNextCursorAndUserId(
         nextCursor,
         partnerId,
         halfLimit,
       );
       if (nextMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
         partnerId,
         halfLimit - 1,
       );
       if (prevMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
       const responseMoments = moments.map((moment) => {
@@ -655,7 +655,7 @@ export const feedMomentByMeController = async (req, res) => {
     if (!prevCursor && !nextCursor) {
       const moments = await getMomentsByUserId(myId, limit);
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -683,7 +683,7 @@ export const feedMomentByMeController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -711,7 +711,7 @@ export const feedMomentByMeController = async (req, res) => {
       );
 
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -740,7 +740,7 @@ export const feedMomentByMeController = async (req, res) => {
       const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const nextMoment = await getMomentsByNextCursorAndUserId(
         nextCursor,
@@ -748,7 +748,7 @@ export const feedMomentByMeController = async (req, res) => {
         halfLimit,
       );
       if (nextMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
@@ -756,7 +756,7 @@ export const feedMomentByMeController = async (req, res) => {
         halfLimit - 1,
       );
       if (prevMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
@@ -810,7 +810,7 @@ export const gridMomentByMeController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -835,7 +835,7 @@ export const gridMomentByMeController = async (req, res) => {
         limit,
       );
       if (moments.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
       console.log("moments from feed moment", moments);
 
       const responseMoments = moments.map((moment) => {
@@ -861,7 +861,7 @@ export const gridMomentByMeController = async (req, res) => {
       const halfLimit = limit / 2;
       const currentMoment = await getMomentById(prevCursor);
       if (!currentMoment)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const nextMoment = await getMomentsByNextCursorAndUserId(
         nextCursor,
@@ -869,7 +869,7 @@ export const gridMomentByMeController = async (req, res) => {
         halfLimit,
       );
       if (nextMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const prevMoment = await getMomentsByPrevCursorAndUserId(
         prevCursor,
@@ -877,7 +877,7 @@ export const gridMomentByMeController = async (req, res) => {
         halfLimit - 1,
       );
       if (prevMoment.length === 0)
-        return res.status(404).json({ message: "no moments found" });
+        return res.json({ moments: [], nextEnd: true, prevEnd: true });
 
       const moments = [...prevMoment, currentMoment, ...nextMoment];
       console.log("moments from feed moment", moments);
