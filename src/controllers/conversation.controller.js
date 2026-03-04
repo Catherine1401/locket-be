@@ -122,8 +122,19 @@ export const sendMessageController = async (req, res) => {
         };
 
         // Emit realtime tới tất cả clients trong room của conversation
+        // VÀ tới personal room của người nhận (để nhận ngay cả khi không ở trong ChatScreen)
         try {
-            getIO().to(`conversation:${conversationId}`).emit("new_message", messageData);
+            const io = getIO();
+            // Xác định receiverId (người không phải sender)
+            const receiverId = conversation.user_id1 === senderId
+                ? conversation.user_id2
+                : conversation.user_id1;
+
+            // 1. Emit tới conversation room → cho user đang mở ChatScreen
+            io.to(`conversation:${conversationId}`).emit("new_message", messageData);
+
+            // 2. Emit tới personal room của receiver → cho ConversationsScreen / bất kỳ màn hình nào
+            io.to(`user:${receiverId}`).emit("new_message", messageData);
         } catch (_) {
             // Socket.IO không bắt buộc phải được init (dev mode)
         }

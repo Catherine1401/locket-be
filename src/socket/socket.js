@@ -38,7 +38,13 @@ export const initSocket = (httpServer) => {
     io.on("connection", (socket) => {
         console.log(`[Socket] User connected: ${socket.userId} (${socket.id})`);
 
-        // Client gọi để join vào room của một conversation
+        // Auto-join personal room so user always receives their messages
+        // regardless of which screen they are currently on
+        const personalRoom = `user:${socket.userId}`;
+        socket.join(personalRoom);
+        console.log(`[Socket] User ${socket.userId} auto-joined ${personalRoom}`);
+
+        // Client gọi để join vào room của một conversation (khi mở ChatScreen)
         socket.on("join_conversation", (conversationId) => {
             const roomId = `conversation:${conversationId}`;
             socket.join(roomId);
