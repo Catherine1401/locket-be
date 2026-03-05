@@ -48,8 +48,11 @@ export const getMessagesController = async (req, res) => {
             nextcursor ?? null
         );
 
-        const nextCursor =
-            messages.length > 0 ? messages[0].id.toString() : null;
+        // messages đã được .reverse() trong model → messages[0] là cũ nhất, messages[last] là mới nhất
+        // nextCursor = created_at của tin cũ nhất (sẽ lấy tiếp các tin cũ hơn nó)
+        const nextCursor = messages.length > 0
+            ? messages[0].created_at.toISOString()
+            : null;
         const hasMore = messages.length === parseInt(limit);
 
         res.json({

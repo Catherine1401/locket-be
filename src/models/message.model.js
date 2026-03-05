@@ -14,8 +14,8 @@ export const createMessage = async (conversationId, senderId, content, replyToMo
     return response.rows[0];
 };
 
-// Lấy tin nhắn theo conversationId, cursor-based (nextCursor = id nhỏ hơn → cũ hơn)
-// JOIN để lấy thêm thông tin nếu tin nhắn đó reply tới một moment (ảnh, thông tin ng tạo moment)
+// Lấy tin nhắn theo conversationId, cursor-based (nextCursor = created_at của tin nhắn cũ nhất trong batch hiện tại)
+// → page sau sẽ lấy những tin nhắn cũ hơn (created_at < cursor)
 export const getMessagesByConversationId = async (
     conversationId,
     limit = 30,
@@ -39,8 +39,8 @@ export const getMessagesByConversationId = async (
         ${baseSelect}
         WHERE m.conversation_id = $1
           AND m.deleted_at IS NULL
-          AND m.id < $3
-        ORDER BY m.id DESC
+          AND m.created_at < $3
+        ORDER BY m.created_at DESC, m.id DESC
         LIMIT $2
       `,
             values: [conversationId, limit, nextCursor],
@@ -51,7 +51,7 @@ export const getMessagesByConversationId = async (
         ${baseSelect}
         WHERE m.conversation_id = $1
           AND m.deleted_at IS NULL
-        ORDER BY m.id DESC
+        ORDER BY m.created_at DESC, m.id DESC
         LIMIT $2
       `,
             values: [conversationId, limit],
