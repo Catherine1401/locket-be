@@ -121,24 +121,18 @@ export const sendMessageController = async (req, res) => {
             replyToMoment: replyToMomentId ? { id: replyToMomentId.toString() } : null
         };
 
-        // Emit realtime tới tất cả clients trong room của conversation
-        // VÀ tới personal room của người nhận (để nhận ngay cả khi không ở trong ChatScreen)
+        // Emit realtime — dùng chained .to() để socket.io dedup theo socket ID.
+        // Sender ở trong cả 2 rooms (conversation + user:senderId) nhưng chỉ nhận 1 lần.
         try {
             const io = getIO();
-            // Xác định receiverId (người không phải sender)
             const receiverId = conversation.user_id1 === senderId
                 ? conversation.user_id2
                 : conversation.user_id1;
 
-            // 1. Emit tới conversation room → cho user đang mở ChatScreen
-            io.to(`conversation:${conversationId}`).emit("new_message", messageData);
-
-            // 2. Emit tới personal room của receiver → cho ConversationsScreen / bất kỳ màn hình nào
-            io.to(`user:${receiverId}`).emit("new_message", messageData);
-
-            // 3. Emit tới personal room của sender → để ConversationsScreen của sender
-            //    cũng cập nhật lastMessage ngay lập tức
-            io.to(`user:${senderId}`).emit("new_message", messageData);
+            io.to(`conversation:${conversationId}`)   // ChatScreen users
+                .to(`user:${receiverId}`)                // receiver's personal room
+                .to(`user:${senderId}`)                  // sender's ConversationsScreen
+                .emit("new_message", messageData);
         } catch (_) {
             // Socket.IO không bắt buộc phải được init (dev mode)
         }

@@ -325,3 +325,411 @@ Server listening on port 3000 with Socket.IO
 [32m[nodemon] restarting due to changes...[39m
 [32m[nodemon] starting `node app.js`[39m
 Server listening on port 3000 with Socket.IO
+[Socket] User connected: a08301c8-b29c-43f8-9ee9-b702ca6186dc (hKvcJeUUST1RVNu6AAAB)
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc auto-joined user:a08301c8-b29c-43f8-9ee9-b702ca6186dc
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NTI5NjksImV4cCI6MTc3NTI0NDk2OX0.v2btkC-LwtHVh16D2DQjmnuUf4EEoi7GF2wigY-rpPs
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772652969,
+  exp: 1775244969
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NTI5NjksImV4cCI6MTc3NTI0NDk2OX0.v2btkC-LwtHVh16D2DQjmnuUf4EEoi7GF2wigY-rpPs
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772652969,
+  exp: 1775244969
+}
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+error from isAuth TypeError: Cannot read properties of undefined (reading 'split')
+    at isAuth (file:///home/hw/locket-be/src/middlewares/auth.middleware.js:5:45)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at next (/home/hw/locket-be/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/hw/locket-be/node_modules/router/lib/route.js:117:3)
+    at handle (/home/hw/locket-be/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/hw/locket-be/node_modules/router/lib/layer.js:152:17)
+    at /home/hw/locket-be/node_modules/router/index.js:295:15
+    at processParams (/home/hw/locket-be/node_modules/router/index.js:582:12)
+    at next (/home/hw/locket-be/node_modules/router/index.js:291:5)
+    at router.handle (/home/hw/locket-be/node_modules/router/index.js:186:3)
+idToken from google eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDdmNTFhZjJhMTYyNDY3MDc0ODQ2NzRhNDJhZTNjMmI2MjMxOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI4OTIxMzUwMDM3MDMtbm1yMGp0OXE0cWgxbmtsdW9pMGNtYXVwNjM4aWVkcW8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI4OTIxMzUwMDM3MDMtYWFocTc5MWFkYTY5bW9oamtmNDhmZWZ2NjN1ODUyc2QuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIwMDE2NzA5MDIzMjc5NDAxMDYiLCJlbWFpbCI6InRoNTY3MTg0NEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ikh1eSBWxakiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWI2aWV3QnBCYlN0NFVmSy1aZUxEUEJNN0VDYlJzX0VyVmJqRVF0TkVCU1A1N2xwSWRidz1zOTYtYyIsImdpdmVuX25hbWUiOiJIdXkiLCJmYW1pbHlfbmFtZSI6IlbFqSIsImlhdCI6MTc3MjY3NDAxMSwiZXhwIjoxNzcyNjc3NjExfQ.pliMY9th6xxTq2a5ViouJa0JrsDnoPbsUWlZq_-J9hn5ASVzKNNzDfjaavnCyuhLCKkyjNdfsSIWGIMNv82DgWCy6-Z-LPcL3ptEnO-5-eaTFL7O7Eq3x80M75Gd0EMdeCRnGURzZCbV3P9sqtLS6DlG3vuxVSKaatmNhgIMvB4LzxP1qDpcXPr56UkRHdY4kJN3Om0n7HGRbFytvoWF66bol1WQi0jC5FgfmxRotI7eyBtbIox-jNGG35icEOVz8NHfql45ywmutWP-CDZbAwam2cEfZfNwEirt4G6qvBeJDGZYn7cmPQRi-MXb8K1X4b9CrH29qgM-KnrZ6uFM_g
+sub 102001670902327940106
+email th5671844@gmail.com
+picture https://lh3.googleusercontent.com/a/ACg8ocIb6iewBpBbSt4UfK-ZeLDPBM7ECbRs_ErVbjEQtNEBSP57lpIdbw=s96-c
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[Socket] User connected: a14bc2c0-f5da-4b5d-b3da-43ba12be2073 (Z0eGXe3APCea4WygAAAD)
+[Socket] User a14bc2c0-f5da-4b5d-b3da-43ba12be2073 auto-joined user:a14bc2c0-f5da-4b5d-b3da-43ba12be2073
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[Socket] User disconnected: a14bc2c0-f5da-4b5d-b3da-43ba12be2073
+[Socket] User connected: a14bc2c0-f5da-4b5d-b3da-43ba12be2073 (wU2TS1VzGSsQszFhAAAF)
+[Socket] User a14bc2c0-f5da-4b5d-b3da-43ba12be2073 auto-joined user:a14bc2c0-f5da-4b5d-b3da-43ba12be2073
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[Socket] User a14bc2c0-f5da-4b5d-b3da-43ba12be2073 joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[Socket] User a14bc2c0-f5da-4b5d-b3da-43ba12be2073 joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User disconnected: a14bc2c0-f5da-4b5d-b3da-43ba12be2073
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[Socket] User connected: a14bc2c0-f5da-4b5d-b3da-43ba12be2073 (v3fvRD9HKNE5arN8AAAH)
+[Socket] User a14bc2c0-f5da-4b5d-b3da-43ba12be2073 auto-joined user:a14bc2c0-f5da-4b5d-b3da-43ba12be2073
+[Socket] User disconnected: a08301c8-b29c-43f8-9ee9-b702ca6186dc
+[Socket] User connected: a08301c8-b29c-43f8-9ee9-b702ca6186dc (JIypvIcK_Onki3EyAAAJ)
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc auto-joined user:a08301c8-b29c-43f8-9ee9-b702ca6186dc
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+[Socket] User a08301c8-b29c-43f8-9ee9-b702ca6186dc joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDgzMDFjOC1iMjljLTQzZjgtOWVlOS1iNzAyY2E2MTg2ZGMiLCJpYXQiOjE3NzI2NTMzNDMsImV4cCI6MTc3NTI0NTM0M30.2Sca6tj2ihGwpJDfU1EqjTVALVXHyzSi1Gi6d46ieHw
+payload from isAuth {
+  userId: 'a08301c8-b29c-43f8-9ee9-b702ca6186dc',
+  iat: 1772653343,
+  exp: 1775245343
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[Socket] User a14bc2c0-f5da-4b5d-b3da-43ba12be2073 joined room conversation:6b9564ce-8092-42f2-99f0-bca455c49451
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+token from isAuth eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMTRiYzJjMC1mNWRhLTRiNWQtYjNkYS00M2JhMTJiZTIwNzMiLCJpYXQiOjE3NzI2NzQwMTEsImV4cCI6MTc3NTI2NjAxMX0.1NDcHpiQhxlZjS9S20PEVNQO7sHL6HvpXKz55lxkAPA
+payload from isAuth {
+  userId: 'a14bc2c0-f5da-4b5d-b3da-43ba12be2073',
+  iat: 1772674011,
+  exp: 1775266011
+}
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node app.js`[39m
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:2016:16)
+    at listenInCluster (node:net:2073:12)
+    at Server.listen (node:net:2178:7)
+    at file:///home/hw/locket-be/app.js:25:12
+    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:655:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:2052:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v25.6.1
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
