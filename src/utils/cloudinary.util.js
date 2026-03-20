@@ -1,4 +1,4 @@
-import { cloudinary } from "../config/clouldinary.js";
+import { cloudinary } from "../config/cloudinary.js";
 
 // Upload moment image from file path
 export const uploadImage = async (imagePath) => {
